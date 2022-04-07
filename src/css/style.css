@@ -8,9 +8,9 @@
   --color-primary: #76c893ff;
   --color-primary-darker: #52b69aff;
   --color-primary-darkest: #34a0a4ff;
-  --blue-munsell: #168aadff;
-  --cg-blue: #1a759fff;
-  --lapis-lazuli: #1e6091ff;
+  --color-secundary: #168aadff;
+  --color-secundary-dark: #1a759fff;
+  --color-secundary-darkest: #1e6091ff;
   --yale-blue: #184e77ff;
 }
 
@@ -77,8 +77,6 @@ p {
 
 .nav_logo {
   height: 4.5rem;
-  transition: all 0.3s;
-  color: var(--color-primary);
 }
 
 #nav_logo_text {
@@ -95,6 +93,7 @@ p {
 
 .nav_item {
   margin-left: 4rem;
+  margin-right: 2rem;
 }
 
 .nav_link:link,
@@ -112,6 +111,36 @@ p {
   color: var(--color-primary-darkest);
   padding: 1rem;
   border-radius: 30%;
+}
+
+.btn_login {
+  font-size: 2rem;
+  font-weight: 600;
+  background-color: var(--color-primary);
+  text-decoration: none;
+  display: block;
+  color: white;
+  padding: 8px 16px;
+  transition: all 0.3s;
+  border-radius: 10%;
+}
+
+.btn_login:hover {
+  background-color: var(--color-primary-darkest);
+}
+.btn_logout {
+  font-size: 2rem;
+  font-weight: 600;
+  background-color: red;
+  text-decoration: none;
+  display: none;
+  color: white;
+  padding: 8px 16px;
+  transition: all 0.3s;
+  border-radius: 10%;
+}
+.btn_logout:hover {
+  background-color: rgb(128, 10, 10);
 }
 
 /* HEADER */
@@ -273,6 +302,12 @@ h3 {
 .footer {
   padding: 10rem 1rem;
   background-color: #444;
+  color: #ddd;
+}
+
+.footer_link github-link a {
+  text-decoration: none;
+  color: #ddd;
 }
 
 .footer_logo {
