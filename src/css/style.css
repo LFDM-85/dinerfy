@@ -2,8 +2,8 @@
 
 :root {
   /* coolors  https://coolors.co/palette/d9ed92-b5e48c-99d98c-76c893-52b69a-34a0a4-168aad-1a759f-1e6091-184e77 */
-  --yellow-green-crayola: #d9ed92ff;
-  --color-secundary: #b5e48cff;
+  --collor-yellow: #d9ed92ff;
+  --color-yellow-dark: #b5e48cff;
   --granny-smith-apple: #99d98cff;
   --color-primary: #76c893ff;
   --color-primary-darker: #52b69aff;
@@ -96,6 +96,10 @@ p {
   margin-right: 2rem;
 }
 
+.nav_item-hidden {
+  display: none;
+}
+
 .nav_link:link,
 .nav_link:visited {
   font-size: 1.7rem;
@@ -128,6 +132,23 @@ p {
 .btn_login:hover {
   background-color: var(--color-primary-darkest);
 }
+
+.btn_signin {
+  font-size: 2rem;
+  font-weight: 600;
+  background-color: var(--collor-yellow);
+  text-decoration: none;
+  display: block;
+  color: white;
+  padding: 8px 16px;
+  transition: all 0.3s;
+  border-radius: 10%;
+}
+
+.btn_signin:hover {
+  background-color: var(--color-yellow-dark);
+}
+
 .btn_logout {
   font-size: 2rem;
   font-weight: 600;
@@ -184,10 +205,10 @@ h3 {
 }
 
 .header_img {
-  width: 100%;
+  width: 110%;
   grid-column: 2 / 3;
   grid-row: 1 / span 4;
-  transform: translateY(-6rem);
+  transform: translateY(-2rem);
 }
 
 /* ABOUT BUTTON */
