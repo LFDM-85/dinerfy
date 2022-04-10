@@ -33,10 +33,22 @@ body {
   background-color: #f3f3f3;
 }
 
+::-webkit-scrollbar {
+  width: 15px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-darker);
+  border-radius: 30px;
+  height: 20px;
+}
+
 /*  SECTIONS */
 .section {
-  padding: 15rem 3rem;
-  border-top: 1px solid #ddd;
+  padding: 4rem 2rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   transition: transform 1s, opacity 1s;
 }
@@ -56,6 +68,30 @@ p {
   font-weight: 400;
   font-size: medium;
   letter-spacing: 1.35;
+}
+
+.about_article {
+  margin-top: 6rem;
+  flex: 1;
+
+  max-width: 125rem;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  row-gap: 3rem;
+  align-content: center;
+  justify-content: center;
+
+  align-items: start;
+  justify-items: start;
+}
+
+.about_article img {
+  width: 120%;
+  grid-column: 2 / 4;
+  grid-row: 1 / span 4;
+  box-shadow: 10px 10px 5px;
+  border-radius: 10%;
+  transform: translateY(-0rem);
 }
 
 /* NAVIGATION */
@@ -111,9 +147,7 @@ p {
 }
 
 .nav_link:hover {
-  /* background-color: var(--color-primary-darker); */
-  color: var(--color-primary-darkest);
-  padding: 1rem;
+  color: var(--color-secundary-darkest);
   border-radius: 30%;
 }
 
@@ -122,9 +156,11 @@ p {
   font-weight: 600;
   background-color: var(--color-primary);
   text-decoration: none;
-  display: block;
+  display: inline-block;
   color: white;
-  padding: 8px 16px;
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem;
+
   transition: all 0.3s;
   border-radius: 10%;
 }
@@ -138,9 +174,10 @@ p {
   font-weight: 600;
   background-color: var(--collor-yellow);
   text-decoration: none;
-  display: block;
+  display: inline-block;
   color: white;
-  padding: 8px 16px;
+  padding: 0.5rem 1.5rem;
+  margin: 0.5rem;
   transition: all 0.3s;
   border-radius: 10%;
 }
@@ -205,7 +242,7 @@ h3 {
 }
 
 .header_img {
-  width: 110%;
+  width: 100%;
   grid-column: 2 / 3;
   grid-row: 1 / span 4;
   transform: translateY(-2rem);
@@ -319,6 +356,26 @@ h3 {
   transition: transform 0.5s cubic-bezier(0, 0.53, 0.29, 1) 0.56s;
   transform-origin: left;
 }
+
+.menu {
+  display: flex;
+  padding-left: 4rem;
+  margin-top: 3rem;
+}
+.box_container {
+  border: 5px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ddd;
+  margin: 10px;
+  font-weight: 600;
+}
+.menu_img {
+  width: 250px;
+}
+
 /* FOOTER */
 .footer {
   padding: 10rem 1rem;

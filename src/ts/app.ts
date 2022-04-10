@@ -1,3 +1,5 @@
+console.log("testing...");
+
 ////////////////////////////
 //DOM ELEMENTS
 
