@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="img/icon.svg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <title>DINNERFY</title>
     <link rel="stylesheet" href="/src/css/style.css" />
@@ -19,28 +26,17 @@
             <img src="./img/icon.svg" alt="logo" class="nav_logo" />
             <strong id="nav_logo_text">DINNERFY</strong>
           </div>
-          <ul class="nav_list">
-            <li class="nav_item">
-              <a class="nav_link active" href="#">Home</a>
-            </li>
-            <li class="nav_item">
-              <a class="nav_link btn_scroll" href="#section_1">About</a>
-            </li>
-            <li class="nav_item">
-              <a class="nav_link btn_scroll" href="#section_2">Menu</a>
-            </li>
-            <li class="nav_item">
-              <a class="nav_link btn_scroll" href="#section_3">Reviews</a>
-            </li>
-            <li class="nav_item hidden">
-              <a class="nav_link btn_scroll" href="#section_4">Schedule</a>
-            </li>
-            <li>
-              <a class="btn btn_login" href="#">Login</a>
-              <a class="btn btn_signin" href="#">Sign in</a>
-              <a class="btn btn_logout" href="#">Logout</a>
-            </li>
-          </ul>
+          <div id="menubar" class="fas fa-bars"></div>
+          <div class="nav_list">
+            <a class="nav_link active" href="#">Home</a>
+            <a class="nav_link btn_scroll" href="#section_1">About</a>
+            <a class="nav_link btn_scroll" href="#section_2">Menu</a>
+            <a class="nav_link btn_scroll" href="#section_3">Reviews</a>
+            <a class="nav_link btn_scroll" href="#section_4">Schedule</a>
+            <a class="btn btn_login" href="#">Login</a>
+            <a class="btn btn_signin" href="#">Sign in</a>
+            <a class="btn btn_logout" href="#">Logout</a>
+          </div>
         </nav>
         <div class="header_title">
           <h1 class="title title_hero">Dinnerfy</h1>

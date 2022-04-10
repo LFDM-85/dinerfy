@@ -27,11 +27,9 @@ const btnscrollto = document.querySelector("#btn_scroll");
 const navScrollTo = btnsNavscrollto.forEach((btn) => {
   btn?.addEventListener("click", function (e) {
     e.preventDefault();
-    sections.forEach((section) => {
-      section.scrollIntoView({
-        behavior: "smooth",
-      });
-    });
+    sections.forEach((section) =>
+      section.scrollIntoView({ behavior: "smooth" })
+    );
   });
 });
 

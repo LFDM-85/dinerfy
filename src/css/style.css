@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 :root {
   /* coolors  https://coolors.co/palette/d9ed92-b5e48c-99d98c-76c893-52b69a-34a0a4-168aad-1a759f-1e6091-184e77 */
   --collor-yellow: #d9ed92ff;
@@ -15,9 +14,15 @@
 }
 
 * {
+  font-family: "Nunito", sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s linear;
+
+  box-sizing: border-box;
 }
 
 html {
@@ -26,7 +31,6 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
   font-weight: 300;
   color: #444;
   line-height: 1.9;
@@ -52,7 +56,7 @@ body {
 
   transition: transform 1s, opacity 1s;
 }
-.section-hidden {
+.hidden {
   /* opacity: 0; */
   display: none;
 }
@@ -91,24 +95,21 @@ p {
   grid-row: 1 / span 4;
   box-shadow: 10px 10px 5px;
   border-radius: 10%;
-  transform: translateY(-0rem);
 }
 
 /* NAVIGATION */
 .nav {
+  /* position: fixed; */
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 9rem;
+  /* height: 6rem; */
   width: 100%;
   padding: 0 6rem;
   z-index: 100;
-}
-
-/* nav and stickly class at the same time */
-.nav.sticky {
-  position: fixed;
-  background-color: rgba(255, 255, 255, 0.95);
 }
 
 .nav_logo {
@@ -127,11 +128,6 @@ p {
   list-style: none;
 }
 
-.nav_item {
-  margin-left: 4rem;
-  margin-right: 2rem;
-}
-
 .nav_item-hidden {
   display: none;
 }
@@ -139,6 +135,8 @@ p {
 .nav_link:link,
 .nav_link:visited {
   font-size: 1.7rem;
+  margin-left: 4rem;
+  margin-right: 2rem;
   font-weight: 600;
   color: var(--color-primary);
   text-decoration: none;
@@ -152,8 +150,8 @@ p {
 }
 
 .btn_login {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 900;
   background-color: var(--color-primary);
   text-decoration: none;
   display: inline-block;
@@ -170,8 +168,8 @@ p {
 }
 
 .btn_signin {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 900;
   background-color: var(--collor-yellow);
   text-decoration: none;
   display: inline-block;
@@ -187,8 +185,8 @@ p {
 }
 
 .btn_logout {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 900;
   background-color: red;
   text-decoration: none;
   display: none;
@@ -201,6 +199,14 @@ p {
   background-color: rgb(128, 10, 10);
 }
 
+#menubar {
+  font-size: 3rem;
+  cursor: pointer;
+  color: var(--color-primary);
+  display: none;
+}
+
+/* -------------------------------------------- */
 /* HEADER */
 .header {
   padding: 0 3rem;
@@ -227,6 +233,7 @@ p {
 h1 {
   font-size: 5.5rem;
   line-height: 1.35;
+  font-weight: 900;
 }
 
 .title_hero {
@@ -388,5 +395,44 @@ h3 {
   color: #ddd;
 }
 
-.footer_logo {
+/* Media Queries */
+
+@media (max-width: 1088px) {
+  html {
+    font-size: 55%;
+  }
+  .header {
+    padding: 2rem;
+  }
+  .section {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 855px) {
+  html {
+    font-size: 45%;
+  }
+  #menubar {
+    display: initial;
+  }
+  .nav_list {
+    font-size: xx-large;
+    font-weight: 600;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #f3f3f3;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem;
+    padding: 1.5rem;
+    display: block;
+  }
+
+  .nav_list {
+    /* border: 2rem solid --color-primary-darkest;
+    border-left: 0.5rem solid --color-secundary-darkest; */
+  }
 }
