@@ -452,6 +452,7 @@ h3 {
   font-weight: 900;
   font-size: large;
   background-color: #f3f3f3;
+  padding: 5px 50px;
 }
 .modal_form button:hover {
   background-color: var(--color-primary-darker);
