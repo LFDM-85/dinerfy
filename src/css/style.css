@@ -428,7 +428,8 @@ h3 {
     justify-content: center;
     margin: 1.5rem;
     padding: 1.5rem;
-    display: block;
+    /* display: block; */
+    display: none;
   }
 
   .nav_list {
