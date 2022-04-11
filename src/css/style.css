@@ -28,6 +28,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -96,6 +97,7 @@ p {
   box-shadow: 10px 10px 5px;
   border-radius: 10%;
 }
+/* --------------------------------------------------------------------- */
 
 /* NAVIGATION */
 .nav {
@@ -395,7 +397,7 @@ h3 {
   color: #ddd;
 }
 
-/* Media Queries */
+/* Media Queries
 
 @media (max-width: 1088px) {
   html {
@@ -431,9 +433,5 @@ h3 {
     /* display: block; */
     display: none;
   }
-
-  .nav_list {
-    /* border: 2rem solid --color-primary-darkest;
-    border-left: 0.5rem solid --color-secundary-darkest; */
-  }
 }
+ */
