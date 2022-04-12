@@ -105,7 +105,7 @@ plates.forEach((plate) => {
     menuday.classList.add("flex-container");
     menuday.innerHTML = `
         <div class='flex-items' >
-                 <h3>${plate.Day}</h3>;
+                 <h4>${plate.Day}-${plate.Type}</h4>
   
           <div class="box_container">
           <div class="container">
