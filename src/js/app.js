@@ -124,3 +124,6 @@ plates.forEach((plate) => {
         `;
     menuItems.prepend(menuday);
 });
+const orderSend = () => {
+    console.log("Your order was sended...");
+};

@@ -128,29 +128,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 ////////////////////////////
-//LOGOUT MODAL
-
-////////////////////////////
-//LOGIN LOGIC
-
-////////////////////////////
-//SIGN IN LOGIC -> LocalStorage
-
-// const signIn = () => {
-//   const username = (<HTMLInputElement>document.querySelector("#username"))
-//     ?.value;
-//   const password = (<HTMLInputElement>document.querySelector("#password"))
-//     ?.value;
-//   const email = (<HTMLInputElement>document.querySelector("#email"))?.value;
-// };
-
-////////////////////////////
-//LOGOUT LOGIC
-
-////////////////////////////
-//LOCALSTORAGE LOGIC
-
-////////////////////////////
 //MENU LIST
 
 plates.forEach((plate) => {
@@ -178,6 +155,13 @@ plates.forEach((plate) => {
 
   menuItems.prepend(menuday);
 });
+
+////////////////////////////
+// ORDER
+
+const orderSend = () => {
+  console.log("Your order was sended...");
+};
 
 ////////////////////////////
 //REVIEWS

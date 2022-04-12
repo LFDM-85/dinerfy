@@ -543,6 +543,41 @@ h4 {
   display: none;
 }
 
+/* ------ Forms ---------- */
+.order {
+  display: inline-block;
+}
+.order_form {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  margin-top: 10rem;
+
+  flex-wrap: wrap;
+}
+
+.order_item {
+  display: inline-block;
+  padding: 2rem;
+  padding-left: 9rem;
+}
+.order_item h4 {
+  font-size: 2rem;
+}
+
+.btn_order {
+  margin: 3rem;
+  padding: 2rem 5rem;
+  background-color: var(--color-primary);
+  color: #f3f3f3;
+}
+
+.btn_order:hover {
+  background-color: var(--color-primary-darkest);
+}
+
 /* Media Queries
 
 @media (max-width: 1088px) {
