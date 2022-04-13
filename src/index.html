@@ -33,14 +33,14 @@
             <a class="nav_link" href="#section_1">About</a>
             <a class="nav_link" href="#section_2">Menu</a>
             <a class="nav_link" href="#section_3">Reviews</a>
-            <a class="nav_link nav_order hidden" href="#section_4">Order</a>
+            <a class="nav_link nav_link_order hidden"  href="#section_4">Order</a>
             <a onclick="openModal('login')" class="btn btn_login" href="#"
               >Login</a
             >
             <a onclick="openModal('signin')" class="btn btn_signin" href="#"
               >Sign in</a
             >
-            <a class="btn btn_logout hidden" href="#">Logout</a>
+            <a onclick='logout()' class="btn btn_logout hidden" href="#">Logout</a>
           </div>
         </nav>
         <div class="header_title">
@@ -185,48 +185,49 @@
         </div>
         <div class="order_item">
           <h4>Tuesday</h4>
-
-          <select width=100
+          <div class="form_order_select" id="form">
+            <select width=100
             style="width: 350px">
-          <option value='fish'>Fish</option>
-          <option value='meat'>Meat</option>
-          <option value='' selected>Select yor type of food for Tuesday</option>
+            <option value='fish'>Fish</option>
+            <option value='meat'>Meat</option>
+            <option value='' selected>Select yor type of food for Tuesday</option>
           </select>
+        </div>
 
         </div>
         <div class="order_item">
           <h4>Wednesday</h4>
-
+          <div class="form_order_select" id="form"></div>
           <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
           <option value='' selected>Select yor type of food for Wednesday</option>
           </select>
-
         </div>
         <div class="order_item">
           <h4>Thursday</h4>
-
+          <div class="form_order_select" id="form"></div>
           <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
           <option value='' selected>Select yor type of food for Thursday</option>
           </select>
-
         </div>
         <div class="order_item">
           <h4>Friday</h4>
-          <select width=100
+          <div class="form_order_select" id="form">
+            <select width=100
             style="width: 350px">
-          <option value='fish'>Fish</option>
-          <option value='meat'>Meat</option>
-          <option value='' selected>Select yor type of food for Friday</option>
+            <option value='fish'>Fish</option>
+            <option value='meat'>Meat</option>
+            <option value='' selected>Select yor type of food for Friday</option>
           </select>
-          <button onclick="orderSend()" class='btn_order' type="submit"> Submit your order</button>
-        </form>
+        </div>
       </div>
+    </div>
+    <button onclick="orderSend()" class='btn_order' type="submit"> Submit your order</button>
     </article>
     </section>
     <!-- Section 4 - Schedule End -->

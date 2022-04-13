@@ -93,6 +93,7 @@ interface User {
   email: string;
   chosenDays: string[];
   chosenMeals: string[];
+  pay: number;
 }
 
 let user: User = {
@@ -101,6 +102,7 @@ let user: User = {
   email: "",
   chosenDays: [],
   chosenMeals: [],
+  pay: 0,
 };
 
 ////////////////////////////
@@ -161,9 +163,11 @@ plates.forEach((plate) => {
 });
 
 ////////////////////////////
-// VALIDATE
+// VALIDATE ENTER AND EXIT
 const enter = () => {
-  const order_nav = document.querySelector(".nav_order") as HTMLButtonElement;
+  const order_nav = document.querySelector(
+    ".nav_link_order"
+  ) as HTMLButtonElement;
   const order_section = document.querySelector("#section_4") as HTMLElement;
   const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
   const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
@@ -174,6 +178,22 @@ const enter = () => {
   login_nav.classList.add("hidden");
   signin_nav.classList.add("hidden");
   logout_nav.classList.remove("hidden");
+};
+
+const exit = () => {
+  const order_nav = document.querySelector(
+    ".nav_link_order"
+  ) as HTMLButtonElement;
+  const order_section = document.querySelector("#section_4") as HTMLElement;
+  const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
+  const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
+  const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
+
+  order_nav.classList.add("hidden");
+  order_section.classList.add("hidden");
+  login_nav.classList.remove("hidden");
+  signin_nav.classList.remove("hidden");
+  logout_nav.classList.add("hidden");
 };
 
 ////////////////////////////
@@ -215,6 +235,12 @@ const signin = () => {
   } else {
     alert("This user already exists");
   }
+};
+
+///////////////////////////
+//LOGOUT
+const logout = () => {
+  if (confirm("Do you sure you want to leave?")) exit();
 };
 
 ////////////////////////////

@@ -4,7 +4,7 @@
 
 2- Build a About section, where you will talk about the restaurant; ✔️
 
-3- Build a Menu section, where you are going to display the plates list for the week. The data that will feed this section can change so the plates part must be built in JavaScript (the plates object is provided in the next page);
+3- Build a Menu section, where you are going to display the plates list for the week. The data that will feed this section can change so the plates part must be built in JavaScript (the plates object is provided in the next page); ✔️
 
 4- Create a way for user to login, register or logout in the website. At this stage use localStorage to keep user logged in;
 

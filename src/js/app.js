@@ -82,6 +82,7 @@ let user = {
     email: "",
     chosenDays: [],
     chosenMeals: [],
+    pay: 0,
 };
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
@@ -131,7 +132,7 @@ plates.forEach((plate) => {
     menuItems.prepend(menuday);
 });
 const enter = () => {
-    const order_nav = document.querySelector(".nav_order");
+    const order_nav = document.querySelector(".nav_link_order");
     const order_section = document.querySelector("#section_4");
     const login_nav = document.querySelector(".btn_login");
     const signin_nav = document.querySelector(".btn_signin");
@@ -141,6 +142,18 @@ const enter = () => {
     login_nav.classList.add("hidden");
     signin_nav.classList.add("hidden");
     logout_nav.classList.remove("hidden");
+};
+const exit = () => {
+    const order_nav = document.querySelector(".nav_link_order");
+    const order_section = document.querySelector("#section_4");
+    const login_nav = document.querySelector(".btn_login");
+    const signin_nav = document.querySelector(".btn_signin");
+    const logout_nav = document.querySelector(".btn_logout");
+    order_nav.classList.add("hidden");
+    order_section.classList.add("hidden");
+    login_nav.classList.remove("hidden");
+    signin_nav.classList.remove("hidden");
+    logout_nav.classList.add("hidden");
 };
 const usernameInputSignIn = document.querySelector("#username_signin");
 const passwordInputSignIn = document.querySelector("#password_signin");
@@ -167,6 +180,10 @@ const signin = () => {
     else {
         alert("This user already exists");
     }
+};
+const logout = () => {
+    if (confirm("Do you sure you want to leave?"))
+        exit();
 };
 const orderSend = () => {
     console.log(localStorage);
