@@ -15,7 +15,7 @@
 
     <title>DINNERFY</title>
     <link rel="stylesheet" href="/src/css/style.css" />
-    
+
     <script defer src="./js/app.js"></script>
   </head>
   <body>
@@ -33,14 +33,14 @@
             <a class="nav_link" href="#section_1">About</a>
             <a class="nav_link" href="#section_2">Menu</a>
             <a class="nav_link" href="#section_3">Reviews</a>
-            <a class="nav_link hidden" href="#section_4">Order</a>
+            <a class="nav_link nav_order hidden" href="#section_4">Order</a>
             <a onclick="openModal('login')" class="btn btn_login" href="#"
               >Login</a
             >
             <a onclick="openModal('signin')" class="btn btn_signin" href="#"
               >Sign in</a
             >
-            <a class="btn btn_logout" href="#">Logout</a>
+            <a class="btn btn_logout hidden" href="#">Logout</a>
           </div>
         </nav>
         <div class="header_title">
@@ -97,8 +97,8 @@
       <h3>Menu - PLATES OF THE WEEK</h3>
       <article class="menu">
         <!-- <div class="flex-container">
-         <div class="flex-items"> 
-            <h3>Monday</h3> 
+         <div class="flex-items">
+            <h3>Monday</h3>
             <div class="box_container">
               <div class="container">
                 <img
@@ -167,58 +167,58 @@
     <!-- Section 3 - Review End -->
 
     <!-- Section 4 - Schedule Start -->
-    <section class="section" id="section_4">
+    <section class="section hidden" id="section_4">
       <h3>Order - ORDER YOUR TASTY FOODS</h3>
       <h1></h1>
-      <article class="order">
-        <div class="order_form">
+    <article class="order">
+      <div class="order_form">
         <div class="order_item">
           <h4>Monday</h4>
-         <form class="form_order_select" id="form">
-          <select width=100 
+         <div class="form_order_select" id="form">
+          <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
           <option value='' selected>Select yor type of food for Monday</option>
           </select>
-          
-        </div>  
+          </div>
+        </div>
         <div class="order_item">
           <h4>Tuesday</h4>
-          
-          <select width=100 
+
+          <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
           <option value='' selected>Select yor type of food for Tuesday</option>
           </select>
-         
-        </div>  
+
+        </div>
         <div class="order_item">
           <h4>Wednesday</h4>
-          
-          <select width=100 
+
+          <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
           <option value='' selected>Select yor type of food for Wednesday</option>
           </select>
-          
-        </div>  
+
+        </div>
         <div class="order_item">
           <h4>Thursday</h4>
-          
-          <select width=100 
+
+          <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
           <option value='' selected>Select yor type of food for Thursday</option>
           </select>
-          
-        </div>  
+
+        </div>
         <div class="order_item">
           <h4>Friday</h4>
-          <select width=100 
+          <select width=100
             style="width: 350px">
           <option value='fish'>Fish</option>
           <option value='meat'>Meat</option>
@@ -226,10 +226,8 @@
           </select>
           <button onclick="orderSend()" class='btn_order' type="submit"> Submit your order</button>
         </form>
-      </div>  
-    </div>
-        
-      </article>
+      </div>
+    </article>
     </section>
     <!-- Section 4 - Schedule End -->
 
@@ -279,9 +277,9 @@
         <h2 class="modal_header">Welcome</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input type="text" />
+          <input type="text" placeholder="Enter your username"/>
           <label>Password</label>
-          <input type="text" />
+          <input type="text" placeholder="Enter your password"/>
           <button class="btn_login_send">Login</button>
         </div>
       </div>
@@ -289,12 +287,12 @@
         <h2 class="modal_header">Sign In</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input id="username" type="text" />
+          <input id="username_signin" type="text" placeholder="Set username"/>
           <label>Password</label>
-          <input id="password" type="text" />
+          <input id="password_signin" type="text" placeholder="Set password"/>
           <label>Email Address</label>
-          <input id="email" type="email" />
-          <button class="btn_signin_send">Sign in</button>
+          <input id="email_signin" type="email" placeholder="Set email" />
+          <button onclick="signin()" class="btn_signin_send">Sign in</button>
         </div>
       </div>
     </div>

@@ -87,7 +87,7 @@ p {
 }
 
 .about_article img {
-  width: 120%;
+  width: 400px;
   grid-column: 2 / 4;
   grid-row: 1 / span 4;
   box-shadow: 10px 10px 5px;
@@ -124,10 +124,6 @@ p {
   display: flex;
   align-items: center;
   list-style: none;
-}
-
-.nav_item-hidden {
-  display: none;
 }
 
 .nav_link:link,
@@ -185,7 +181,6 @@ p {
   font-weight: 900;
   background-color: red;
   text-decoration: none;
-  display: none;
   color: white;
   padding: 8px 16px;
   transition: all 0.3s;
@@ -572,6 +567,7 @@ h4 {
   padding: 2rem 5rem;
   background-color: var(--color-primary);
   color: #f3f3f3;
+  font-weight: 900;
 }
 
 .btn_order:hover {

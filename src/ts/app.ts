@@ -83,10 +83,6 @@ const overlay = document.querySelector(".overlay") as HTMLElement;
 const modal = document.querySelector(".modal") as HTMLElement;
 const menuItems = document.querySelector(".menu") as HTMLElement;
 
-const btnSignIn = document.querySelector(
-  ".btn_signin_send"
-) as HTMLButtonElement;
-
 /// SignIn
 
 ////////////////////////////
@@ -98,6 +94,14 @@ interface User {
   chosenDays: string[];
   chosenMeals: string[];
 }
+
+let user: User = {
+  username: "",
+  password: "",
+  email: "",
+  chosenDays: [],
+  chosenMeals: [],
+};
 
 ////////////////////////////
 // Modal logic
@@ -157,10 +161,70 @@ plates.forEach((plate) => {
 });
 
 ////////////////////////////
+// VALIDATE
+const enter = () => {
+  const order_nav = document.querySelector(".nav_order") as HTMLButtonElement;
+  const order_section = document.querySelector("#section_4") as HTMLElement;
+  const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
+  const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
+  const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
+
+  order_nav.classList.remove("hidden");
+  order_section.classList.remove("hidden");
+  login_nav.classList.add("hidden");
+  signin_nav.classList.add("hidden");
+  logout_nav.classList.remove("hidden");
+};
+
+////////////////////////////
+// REGISTER
+const usernameInputSignIn = document.querySelector(
+  "#username_signin"
+) as HTMLInputElement;
+const passwordInputSignIn = document.querySelector(
+  "#password_signin"
+) as HTMLInputElement;
+const emailInputSignIn = document.querySelector(
+  "#email_signin"
+) as HTMLInputElement;
+const btnSignIn = document.querySelector(
+  ".btn_signin_send"
+) as HTMLButtonElement;
+
+const signin = () => {
+  const username = usernameInputSignIn.value;
+  const password = passwordInputSignIn.value;
+  const email = emailInputSignIn.value;
+
+  if (!username || !password || !email) return;
+
+  const users: string[] = [];
+
+  if (!user.username.includes(username) && !user.email.includes(email)) {
+    user.username = username;
+    user.password = password;
+    user.email = email;
+    const userid = `user.${Math.random().toFixed(4)}`;
+    users.push(userid);
+
+    localStorage.setItem(users.toString(), JSON.stringify(user));
+    console.log(localStorage);
+    enter();
+
+    closeModal();
+  } else {
+    alert("This user already exists");
+  }
+};
+
+////////////////////////////
+//
+
+////////////////////////////
 // ORDER
 
 const orderSend = () => {
-  console.log("Your order was sended...");
+  console.log(localStorage);
 };
 
 ////////////////////////////
