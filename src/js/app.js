@@ -76,6 +76,9 @@ let plates = [
 const overlay = document.querySelector(".overlay");
 const modal = document.querySelector(".modal");
 const menuItems = document.querySelector(".menu");
+const usernameInputSignIn = document.querySelector("#username_signin");
+const passwordInputSignIn = document.querySelector("#password_signin");
+const emailInputSignIn = document.querySelector("#email_signin");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
@@ -152,15 +155,12 @@ const addUser = (username, password, email) => {
     localStorage.setItem("Users", JSON.stringify(users));
     return { username, password, email };
 };
+const clearInputs = () => {
+    usernameInputSignIn.value = "";
+    passwordInputSignIn.value = "";
+    emailInputSignIn.value = "";
+};
 const signin = () => {
-    const usernameInputSignIn = document.querySelector("#username_signin");
-    const passwordInputSignIn = document.querySelector("#password_signin");
-    const emailInputSignIn = document.querySelector("#email_signin");
-    const clearInputs = () => {
-        usernameInputSignIn.value = "";
-        passwordInputSignIn.value = "";
-        emailInputSignIn.value = "";
-    };
     addUser(usernameInputSignIn.value, passwordInputSignIn.value, emailInputSignIn.value);
     clearInputs();
     enter();

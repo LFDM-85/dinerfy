@@ -82,10 +82,15 @@ let plates = [
 const overlay = document.querySelector(".overlay") as HTMLElement;
 const modal = document.querySelector(".modal") as HTMLElement;
 const menuItems = document.querySelector(".menu") as HTMLElement;
-
-/// SignIn
-
-////////////////////////////
+const usernameInputSignIn = document.querySelector(
+  "#username_signin"
+) as HTMLInputElement;
+const passwordInputSignIn = document.querySelector(
+  "#password_signin"
+) as HTMLInputElement;
+const emailInputSignIn = document.querySelector(
+  "#email_signin"
+) as HTMLInputElement;
 
 interface User {
   username: string;
@@ -95,15 +100,6 @@ interface User {
   chosenMeals: string[];
   pay: number;
 }
-
-// let user: User = {
-//   username: "",
-//   password: "",
-//   email: "",
-//   chosenDays: [],
-//   chosenMeals: [],
-//   pay: 0,
-// };
 
 const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
 
@@ -189,9 +185,6 @@ const exit = () => {
 // ADD USER
 
 const addUser = (username: string, password: string, email: string) => {
-  /////////////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////////////
   users.push({
     username,
     password,
@@ -206,24 +199,13 @@ const addUser = (username: string, password: string, email: string) => {
   return { username, password, email };
 };
 
+const clearInputs = () => {
+  usernameInputSignIn.value = "";
+  passwordInputSignIn.value = "";
+  emailInputSignIn.value = "";
+};
+
 const signin = () => {
-  // Elements
-  const usernameInputSignIn = document.querySelector(
-    "#username_signin"
-  ) as HTMLInputElement;
-  const passwordInputSignIn = document.querySelector(
-    "#password_signin"
-  ) as HTMLInputElement;
-  const emailInputSignIn = document.querySelector(
-    "#email_signin"
-  ) as HTMLInputElement;
-
-  const clearInputs = () => {
-    usernameInputSignIn.value = "";
-    passwordInputSignIn.value = "";
-    emailInputSignIn.value = "";
-  };
-
   addUser(
     usernameInputSignIn.value,
     passwordInputSignIn.value,
@@ -265,16 +247,8 @@ const logout = () => {
 };
 
 ////////////////////////////
-//
-
-////////////////////////////
 // ORDER
 
 const orderSend = () => {
   console.log(localStorage);
 };
-
-////////////////////////////
-//REVIEWS
-////////////////////////////
-//FOOTER
