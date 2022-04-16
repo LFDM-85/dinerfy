@@ -571,6 +571,25 @@ h4 {
   background-color: var(--color-primary-darkest);
 }
 
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer p {
+  font-size: 2rem;
+}
+
+.footer a {
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: #f3f3f3;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
 .hidden {
   display: none;
 }

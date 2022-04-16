@@ -96,14 +96,16 @@ interface User {
   pay: number;
 }
 
-let user: User = {
-  username: "",
-  password: "",
-  email: "",
-  chosenDays: [],
-  chosenMeals: [],
-  pay: 0,
-};
+// let user: User = {
+//   username: "",
+//   password: "",
+//   email: "",
+//   chosenDays: [],
+//   chosenMeals: [],
+//   pay: 0,
+// };
+
+const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
 
 ////////////////////////////
 // Modal logic
@@ -136,43 +138,39 @@ document.addEventListener("keydown", (e) => {
 ////////////////////////////
 //MENU LIST
 
-plates.forEach((plate) => {
+plates.forEach(({ Day, Type, img, Name, Price }) => {
   const menuday = document.createElement("div");
   menuday.classList.add("flex-container");
   menuday.innerHTML = `
         <div class='flex-items' >
-                 <h4>${plate.Day}-${plate.Type}</h4>
-  
-          <div class="box_container">
+            <h4>${Day}-${Type}</h4>
+            <div class="box_container">
           <div class="container">
             <img
               class="menu_img"
-              src="${plate.img}"
+              src="${img}"
               alt=""
             />
           </div>
-            <span>${plate.Name}</span>
-            <span>${plate.Price},00€</span>
+            <span>${Name}</span>
+            <span>${Price},00€</span>
           </div>
-  
-        </div>
-  
+          </div>  
         `;
-
   menuItems.prepend(menuday);
 });
 
 ////////////////////////////
 // VALIDATE ENTER AND EXIT
-const enter = () => {
-  const order_nav = document.querySelector(
-    ".nav_link_order"
-  ) as HTMLButtonElement;
-  const order_section = document.querySelector("#section_4") as HTMLElement;
-  const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
-  const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
-  const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
+const order_nav = document.querySelector(
+  ".nav_link_order"
+) as HTMLButtonElement;
+const order_section = document.querySelector("#section_4") as HTMLElement;
+const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
+const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
+const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
 
+const enter = () => {
   order_nav.classList.remove("hidden");
   order_section.classList.remove("hidden");
   login_nav.classList.add("hidden");
@@ -181,60 +179,83 @@ const enter = () => {
 };
 
 const exit = () => {
-  const order_nav = document.querySelector(
-    ".nav_link_order"
-  ) as HTMLButtonElement;
-  const order_section = document.querySelector("#section_4") as HTMLElement;
-  const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
-  const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
-  const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
-
   order_nav.classList.add("hidden");
   order_section.classList.add("hidden");
   login_nav.classList.remove("hidden");
   signin_nav.classList.remove("hidden");
   logout_nav.classList.add("hidden");
 };
-
 ////////////////////////////
-// REGISTER
-const usernameInputSignIn = document.querySelector(
-  "#username_signin"
-) as HTMLInputElement;
-const passwordInputSignIn = document.querySelector(
-  "#password_signin"
-) as HTMLInputElement;
-const emailInputSignIn = document.querySelector(
-  "#email_signin"
-) as HTMLInputElement;
-const btnSignIn = document.querySelector(
-  ".btn_signin_send"
-) as HTMLButtonElement;
+// ADD USER
+
+const addUser = (username: string, password: string, email: string) => {
+  /////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////////////////
+  users.push({
+    username,
+    password,
+    email,
+    chosenDays: [],
+    chosenMeals: [],
+    pay: 0,
+  });
+
+  localStorage.setItem("Users", JSON.stringify(users));
+
+  return { username, password, email };
+};
 
 const signin = () => {
-  const username = usernameInputSignIn.value;
-  const password = passwordInputSignIn.value;
-  const email = emailInputSignIn.value;
+  // Elements
+  const usernameInputSignIn = document.querySelector(
+    "#username_signin"
+  ) as HTMLInputElement;
+  const passwordInputSignIn = document.querySelector(
+    "#password_signin"
+  ) as HTMLInputElement;
+  const emailInputSignIn = document.querySelector(
+    "#email_signin"
+  ) as HTMLInputElement;
 
-  if (!username || !password || !email) return;
+  const clearInputs = () => {
+    usernameInputSignIn.value = "";
+    passwordInputSignIn.value = "";
+    emailInputSignIn.value = "";
+  };
 
-  const users: string[] = [];
+  addUser(
+    usernameInputSignIn.value,
+    passwordInputSignIn.value,
+    emailInputSignIn.value
+  );
+  /*   // User validation
+  users.find((_, i) => {
+    // if (users[i].username === usernameInputSignIn.value) {
+    //   alert("Username already taken!!!");
+    //   clearInputs();
+    //   return;
+    // }
+    // if (users[i].email === emailInputSignIn.value) {
+    //   alert("Email already exists!!!");
+    //   clearInputs();
+    //   return;
+    // }
+    if (
+      users[i].username !== usernameInputSignIn.value &&
+      users[i].email !== emailInputSignIn.value
+    ) {
+      // addUser(
+      //   usernameInputSignIn.value,
+      //   passwordInputSignIn.value,
+      //   emailInputSignIn.value
+      // );
+    }
+  }); */
 
-  if (!user.username.includes(username) && !user.email.includes(email)) {
-    user.username = username;
-    user.password = password;
-    user.email = email;
-    const userid = `user.${Math.random().toFixed(4)}`;
-    users.push(userid);
-
-    localStorage.setItem(users.toString(), JSON.stringify(user));
-    console.log(localStorage);
-    enter();
-
-    closeModal();
-  } else {
-    alert("This user already exists");
-  }
+  clearInputs();
+  enter();
+  closeModal();
 };
 
 ///////////////////////////

@@ -161,7 +161,7 @@
     <section class="section" id="section_3">
       <h3>Reviews - WHAT CUSTUMORS SAY ABOUT US</h3>
       <article>
-        <img width="500px" src="./img/under_construction.png" alt="" />
+        <img width="100%" src="./img/under_construction.png" alt="" />
       </article>
     </section>
     <!-- Section 3 - Review End -->
@@ -234,29 +234,7 @@
 
     <!-- Footer Start -->
     <footer class="footer">
-      <!-- <ul class="footer__nav">
-        <li class="footer__item">
-          <a class="footer__link" href="#">About</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Pricing</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Terms of Use</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Privacy Policy</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Careers</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Blog</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Contact Us</a>
-        </li>
-      </ul> -->
+      
       <img src="./img/icon.svg" alt="Logo" class="footer_logo" />
       <p class="footer_copyright">
         &copy; Copyright by
@@ -278,9 +256,9 @@
         <h2 class="modal_header">Welcome</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input type="text" placeholder="Enter your username"/>
+          <input type="text" placeholder="Enter your username" required/>
           <label>Password</label>
-          <input type="text" placeholder="Enter your password"/>
+          <input type="text" placeholder="Enter your password" required/>
           <button class="btn_login_send">Login</button>
         </div>
       </div>
@@ -288,11 +266,11 @@
         <h2 class="modal_header">Sign In</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input id="username_signin" type="text" placeholder="Set username"/>
+          <input id="username_signin" type="text" placeholder="Set username" required/>
           <label>Password</label>
-          <input id="password_signin" type="text" placeholder="Set password"/>
+          <input id="password_signin" type="text" placeholder="Set password" required/>
           <label>Email Address</label>
-          <input id="email_signin" type="email" placeholder="Set email" />
+          <input id="email_signin" type="email" placeholder="Set email" required/>
           <button onclick="signin()" class="btn_signin_send">Sign in</button>
         </div>
       </div>
