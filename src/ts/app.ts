@@ -101,6 +101,7 @@ interface User {
   pay: number;
 }
 
+// users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
 const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
 
 ////////////////////////////
@@ -211,29 +212,6 @@ const signin = () => {
     passwordInputSignIn.value,
     emailInputSignIn.value
   );
-  /*   // User validation
-  users.find((_, i) => {
-    // if (users[i].username === usernameInputSignIn.value) {
-    //   alert("Username already taken!!!");
-    //   clearInputs();
-    //   return;
-    // }
-    // if (users[i].email === emailInputSignIn.value) {
-    //   alert("Email already exists!!!");
-    //   clearInputs();
-    //   return;
-    // }
-    if (
-      users[i].username !== usernameInputSignIn.value &&
-      users[i].email !== emailInputSignIn.value
-    ) {
-      // addUser(
-      //   usernameInputSignIn.value,
-      //   passwordInputSignIn.value,
-      //   emailInputSignIn.value
-      // );
-    }
-  }); */
 
   clearInputs();
   enter();
@@ -244,6 +222,24 @@ const signin = () => {
 //LOGOUT
 const logout = () => {
   if (confirm("Do you sure you want to leave?")) exit();
+};
+
+///////////////////////////
+// LOGIN
+const login = () => {
+  const userLogin = document.querySelector("#userlogin") as HTMLInputElement;
+
+  const readUser = JSON.parse(localStorage.getItem("Users")!);
+  console.log(readUser);
+  readUser.forEach((user: { username: string }) => {
+    if (user.username !== userLogin.value) {
+      alert("User does not exist!!!");
+    } else {
+      clearInputs();
+      enter();
+      closeModal();
+    }
+  });
 };
 
 ////////////////////////////

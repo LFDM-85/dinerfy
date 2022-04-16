@@ -170,6 +170,21 @@ const logout = () => {
     if (confirm("Do you sure you want to leave?"))
         exit();
 };
+const login = () => {
+    const userLogin = document.querySelector("#userlogin");
+    const readUser = JSON.parse(localStorage.getItem("Users"));
+    console.log(readUser);
+    readUser.forEach((user) => {
+        if (user.username !== userLogin.value) {
+            alert("User does not exist!!!");
+        }
+        else {
+            clearInputs();
+            enter();
+            closeModal();
+        }
+    });
+};
 const orderSend = () => {
     console.log(localStorage);
 };

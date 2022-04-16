@@ -256,10 +256,10 @@
         <h2 class="modal_header">Welcome</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input type="text" placeholder="Enter your username" required/>
+          <input id="userlogin" type="text" placeholder="Enter your username" required/>
           <label>Password</label>
-          <input type="text" placeholder="Enter your password" required/>
-          <button class="btn_login_send">Login</button>
+          <input id="passlogin" type="password" placeholder="Enter your password" required/>
+          <button onclick="login()" class="btn_login_send">Login</button>
         </div>
       </div>
       <div id="signin_modal" class="hidden">
@@ -268,7 +268,7 @@
           <label>UserName</label>
           <input id="username_signin" type="text" placeholder="Set username" required/>
           <label>Password</label>
-          <input id="password_signin" type="text" placeholder="Set password" required/>
+          <input id="password_signin" type="password" placeholder="Set password" required/>
           <label>Email Address</label>
           <input id="email_signin" type="email" placeholder="Set email" required/>
           <button onclick="signin()" class="btn_signin_send">Sign in</button>
