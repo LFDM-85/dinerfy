@@ -239,6 +239,11 @@ const logout = () => {
 
 ///////////////////////////
 // LOGIN
+
+// TODO
+
+// Find username and password and check or change html to verify email instead username
+
 const login = () => {
   const userLogin = document.querySelector("#userlogin") as HTMLInputElement;
 
