@@ -190,6 +190,9 @@ const addUser = (username: string, password: string, email: string) => {
   console.log(readUser);
   const foundUser = readUser?.find((user: { email: string }) => {
     // console.log(user, email);
+    alert("User already exist!!!");
+    exit();
+    closeModal();
 
     return user.email === email;
   });

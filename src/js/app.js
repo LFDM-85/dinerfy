@@ -147,6 +147,9 @@ const addUser = (username, password, email) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
     console.log(readUser);
     const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+        alert("User already exist!!!");
+        exit();
+        closeModal();
         return user.email === email;
     });
     if (foundUser)
