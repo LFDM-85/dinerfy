@@ -186,6 +186,16 @@ const exit = () => {
 // ADD USER
 
 const addUser = (username: string, password: string, email: string) => {
+  const readUser = JSON.parse(localStorage.getItem("Users")!);
+  console.log(readUser);
+  const foundUser = readUser?.find((user: { email: string }) => {
+    // console.log(user, email);
+
+    return user.email === email;
+  });
+  // console.log(foundUser);
+  if (foundUser) return;
+
   users.push({
     username,
     password,
@@ -196,6 +206,10 @@ const addUser = (username: string, password: string, email: string) => {
   });
 
   localStorage.setItem("Users", JSON.stringify(users));
+
+  clearInputs();
+  enter();
+  closeModal();
 
   return { username, password, email };
 };
@@ -212,10 +226,6 @@ const signin = () => {
     passwordInputSignIn.value,
     emailInputSignIn.value
   );
-
-  clearInputs();
-  enter();
-  closeModal();
 };
 
 ///////////////////////////

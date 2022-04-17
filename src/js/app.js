@@ -144,6 +144,13 @@ const exit = () => {
     logout_nav.classList.add("hidden");
 };
 const addUser = (username, password, email) => {
+    const readUser = JSON.parse(localStorage.getItem("Users"));
+    console.log(readUser);
+    const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+        return user.email === email;
+    });
+    if (foundUser)
+        return;
     users.push({
         username,
         password,
@@ -153,6 +160,9 @@ const addUser = (username, password, email) => {
         pay: 0,
     });
     localStorage.setItem("Users", JSON.stringify(users));
+    clearInputs();
+    enter();
+    closeModal();
     return { username, password, email };
 };
 const clearInputs = () => {
@@ -162,9 +172,6 @@ const clearInputs = () => {
 };
 const signin = () => {
     addUser(usernameInputSignIn.value, passwordInputSignIn.value, emailInputSignIn.value);
-    clearInputs();
-    enter();
-    closeModal();
 };
 const logout = () => {
     if (confirm("Do you sure you want to leave?"))
