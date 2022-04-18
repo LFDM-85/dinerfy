@@ -49,6 +49,7 @@ body {
 
 /*  SECTIONS */
 .section {
+  margin-top: 2rem;
   padding: 4rem 2rem;
   height: 100vh;
   display: flex;

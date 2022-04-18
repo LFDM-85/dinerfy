@@ -144,7 +144,6 @@ const exit = () => {
     login_nav.classList.remove("hidden");
     signin_nav.classList.remove("hidden");
     logout_nav.classList.add("hidden");
-    sessionStorage.removeItem("CurrUser");
 };
 const addUser = (username, password, email) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
@@ -157,20 +156,22 @@ const addUser = (username, password, email) => {
         closeModal();
         return;
     }
-    users.push({
-        username,
-        password,
-        email,
-        chosenDays: [],
-        chosenMeals: [],
-        pay: 0,
-    });
-    localStorage.setItem("Users", JSON.stringify(users));
-    sessionStorage.setItem("CurrUser", JSON.stringify(users));
-    clearInputs();
-    enter();
-    closeModal();
-    return { username, password, email };
+    if (!foundUser) {
+        users.push({
+            username,
+            password,
+            email,
+            chosenDays: [],
+            chosenMeals: [],
+            pay: 0,
+        });
+        localStorage.setItem("Users", JSON.stringify(users));
+        clearInputs();
+        enter();
+        closeModal();
+        return { username, password, email };
+    }
+    return;
 };
 const clearInputs = () => {
     usernameInputSignIn.value = "";

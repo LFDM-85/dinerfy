@@ -183,8 +183,6 @@ const exit = () => {
   login_nav.classList.remove("hidden");
   signin_nav.classList.remove("hidden");
   logout_nav.classList.add("hidden");
-
-  sessionStorage.removeItem("CurrUser");
 };
 ////////////////////////////
 // ADD USER
@@ -203,23 +201,25 @@ const addUser = (username: string, password: string, email: string) => {
     return;
   }
 
-  users.push({
-    username,
-    password,
-    email,
-    chosenDays: [],
-    chosenMeals: [],
-    pay: 0,
-  });
+  if (!foundUser) {
+    users.push({
+      username,
+      password,
+      email,
+      chosenDays: [],
+      chosenMeals: [],
+      pay: 0,
+    });
 
-  localStorage.setItem("Users", JSON.stringify(users));
-  sessionStorage.setItem("CurrUser", JSON.stringify(users));
+    localStorage.setItem("Users", JSON.stringify(users));
 
-  clearInputs();
-  enter();
-  closeModal();
+    clearInputs();
+    enter();
+    closeModal();
+    return { username, password, email };
+  }
 
-  return { username, password, email };
+  return;
 };
 
 const clearInputs = () => {
