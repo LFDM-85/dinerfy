@@ -79,6 +79,8 @@ const menuItems = document.querySelector(".menu");
 const usernameInputSignIn = document.querySelector("#username_signin");
 const passwordInputSignIn = document.querySelector("#password_signin");
 const emailInputSignIn = document.querySelector("#email_signin");
+const userlogin = document.querySelector("#userlogin");
+const passlogin = document.querySelector("#passlogin");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
@@ -145,7 +147,6 @@ const exit = () => {
 };
 const addUser = (username, password, email) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
-    console.log(readUser);
     const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
         return user.email === email;
     });
@@ -182,20 +183,34 @@ const logout = () => {
     if (confirm("Do you sure you want to leave?"))
         exit();
 };
-const login = () => {
-    const userLogin = document.querySelector("#userlogin");
+const loginUser = (username, password) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
-    console.log(readUser);
-    readUser.forEach((user) => {
-        if (user.username !== userLogin.value) {
-            alert("User does not exist!!!");
-        }
-        else {
-            clearInputs();
-            enter();
-            closeModal();
-        }
+    const foundUsername = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+        return user.username === username;
     });
+    const foundPassword = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+        return user.password === password;
+    });
+    if (!foundUsername && !foundPassword) {
+        alert("User does not exist!!!");
+        exit();
+        closeModal();
+        return;
+    }
+    if (foundUsername && foundPassword) {
+        clearInputs();
+        enter();
+        closeModal();
+        return;
+    }
+    clearInputs();
+    alert("Username or password are incorrect!!! Try again!");
+    closeModal();
+    return;
+};
+const login = () => {
+    loginUser(userlogin.value, passlogin.value);
+    clearInputs();
 };
 const orderSend = () => {
     console.log(localStorage);

@@ -91,6 +91,8 @@ const passwordInputSignIn = document.querySelector(
 const emailInputSignIn = document.querySelector(
   "#email_signin"
 ) as HTMLInputElement;
+const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
+const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
 
 interface User {
   username: string;
@@ -187,7 +189,7 @@ const exit = () => {
 
 const addUser = (username: string, password: string, email: string) => {
   const readUser = JSON.parse(localStorage.getItem("Users")!);
-  console.log(readUser);
+  // console.log(readUser);
   const foundUser = readUser?.find((user: { email: string }) => {
     return user.email === email;
   });
@@ -241,24 +243,37 @@ const logout = () => {
 ///////////////////////////
 // LOGIN
 
-// TODO
+const loginUser = (username: string, password: string) => {
+  const readUser = JSON.parse(localStorage.getItem("Users")!);
+  const foundUsername = readUser?.find((user: { username: string }) => {
+    return user.username === username;
+  });
+  const foundPassword = readUser?.find((user: { password: string }) => {
+    return user.password === password;
+  });
 
-// Find username and password and check or change html to verify email instead username
+  if (!foundUsername && !foundPassword) {
+    alert("User does not exist!!!");
+    exit();
+    closeModal();
+    return;
+  }
+  if (foundUsername && foundPassword) {
+    clearInputs();
+    enter();
+    closeModal();
+    return;
+  }
+  clearInputs();
+  alert("Username or password are incorrect!!! Try again!");
+  closeModal();
+
+  return;
+};
 
 const login = () => {
-  const userLogin = document.querySelector("#userlogin") as HTMLInputElement;
-
-  const readUser = JSON.parse(localStorage.getItem("Users")!);
-  console.log(readUser);
-  readUser.forEach((user: { username: string }) => {
-    if (user.username !== userLogin.value) {
-      alert("User does not exist!!!");
-    } else {
-      clearInputs();
-      enter();
-      closeModal();
-    }
-  });
+  loginUser(userlogin.value, passlogin.value);
+  clearInputs();
 };
 
 ////////////////////////////
