@@ -537,14 +537,14 @@ h4 {
 
 /* ------ Forms ---------- */
 .order {
-  display: inline-block;
-}
-.order_form {
-  display: inline-block;
-  flex-direction: column;
+  display: flex;
   justify-content: center;
   align-items: center;
-  justify-items: center;
+  flex-wrap: wrap;
+}
+.order_form {
+  justify-content: center;
+  align-items: center;
   margin-top: 10rem;
 
   flex-wrap: wrap;
@@ -559,18 +559,26 @@ h4 {
   font-size: 2rem;
 }
 
-.btn_order {
+.totalprice {
+  display: inline-flex;
+}
+#btn_order {
   margin: 3rem;
   padding: 2rem 5rem;
   background-color: var(--color-primary);
   color: #f3f3f3;
   font-weight: 900;
 }
-
-.btn_order:hover {
+#btn_order:hover {
   background-color: var(--color-primary-darkest);
 }
 
+.title_totalprice {
+  justify-self: center;
+  font-weight: 900;
+  font-size: 4rem;
+  padding-top: 4rem;
+}
 .footer {
   display: flex;
   align-items: center;
