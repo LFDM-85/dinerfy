@@ -33,14 +33,18 @@
             <a class="nav_link" href="#section_1">About</a>
             <a class="nav_link" href="#section_2">Menu</a>
             <a class="nav_link" href="#section_3">Reviews</a>
-            <a class="nav_link nav_link_order hidden"  href="#section_4">Order</a>
+            <a class="nav_link nav_link_order hidden" href="#section_4"
+              >Order</a
+            >
             <a onclick="openModal('login')" class="btn btn_login" href="#"
               >Login</a
             >
             <a onclick="openModal('signin')" class="btn btn_signin" href="#"
               >Sign in</a
             >
-            <a onclick='logout()' class="btn btn_logout hidden" href="#">Logout</a>
+            <a onclick="logout()" class="btn btn_logout hidden" href="#"
+              >Logout</a
+            >
           </div>
         </nav>
         <div class="header_title">
@@ -95,9 +99,7 @@
     <!-- Section 2 - Menu Start -->
     <section class="section" id="section_2">
       <h3>Menu - PLATES OF THE WEEK</h3>
-      <article class="menu">
-        
-      </article>
+      <article class="menu"></article>
     </section>
     <!-- Section 2 - Menu End -->
 
@@ -113,76 +115,76 @@
     <!-- Section 4 - Schedule Start -->
     <section class="section hidden" id="section_4">
       <h3>Order - ORDER YOUR TASTY FOODS</h3>
-      
-    <article class="order">
-      <div class="flex-container">
-        <div class="order_form">
-        <div class="order_item">
-          <h4>Monday</h4>
-          <div class="form_order_select " id="form">
-          <select width=100
-            style="width: 350px" id="monday" onchange="getSelectedValue(this)">
-          <option value='fish'>Fish</option>
-          <option value='meat'>Meat</option>
-          <option value='' selected>Select yor type of food for Monday</option>
-          </select>
-          </div>
-        </div>
-        <div class="order_item">
-          <h4>Tuesday</h4>
-          <div class="form_order_select " id="form">
-            <select width=100
-            style="width: 350px" id="tuesday" onchange="getSelectedValue(this)">
-            <option value='fish'>Fish</option>
-            <option value='meat'>Meat</option>
-            <option value='' selected>Select yor type of food for Tuesday</option>
-          </select>
-        </div>
 
-        </div>
-        <div class="order_item">
-          <h4>Wednesday</h4>
-          <div class="form_order_select " id="form"></div>
-          <select width=100
-            style="width: 350px" id="wednesday" onchange="getSelectedValue(this)">
-          <option value='fish'>Fish</option>
-          <option value='meat'>Meat</option>
-          <option value='' selected>Select yor type of food for Wednesday</option>
-          </select>
-        </div>
-        <div class="order_item">
-          <h4>Thursday</h4>
-          <div class="form_order_select " id="form"></div>
-          <select width=100
-            style="width: 350px" id="thursday" onchange="getSelectedValue(this)">
-          <option value='fish'>Fish</option>
-          <option value='meat'>Meat</option>
-          <option value='' selected>Select yor type of food for Thursday</option>
-          </select>
-        </div>
-        <div class="order_item">
-          <h4>Friday</h4>
-          <div class="form_order_select " id="form">
-            <select width=100
-            style="width: 350px" id="friday" onchange="getSelectedValue(this)">
-            <option value='fish'>Fish</option>
-            <option value='meat'>Meat</option>
-            <option value='' selected>Select yor type of food for Friday</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="totalprice">      
-      <h2 class="title_totalprice">The total is: 10€</h2>
-      <button onclick="orderSend()" id='btn_order'> Submit your order</button>
-    </div>
-  </article>
-</section>
+      <article class="order">
+        <form action="#">
+          <div class="flexcontainer">
+            <div class="order_form">
+              <div class="order_item">
+                <h4>Monday</h4>
+                <div class="form_order_select" id="form_monday">
+                  <select name="order_monday" id="monday">
+                    <option value="fish">Fish</option>
+                    <option value="meat">Meat</option>
+                    <option value="" selected>Select food for Monday</option>
+                  </select>
+                </div>
+              </div>
+              <div class="order_item">
+                <h4>Tuesday</h4>
+                <div class="form_order_select" id="form_tuesday">
+                  <select name="order_tuesday" id="tuesday">
+                    <option value="fish">Fish</option>
+                    <option value="meat">Meat</option>
+                    <option value="" selected>Select food for Tuesday</option>
+                  </select>
+                </div>
+              </div>
+              <div class="order_item">
+                <h4>Wednesday</h4>
+                <div class="form_order_select" id="form_wednesday">
+                  <select name="order_wednesday" id="wednesday">
+                    <option value="fish">Fish</option>
+                    <option value="meat">Meat</option>
+                    <option value="" selected>Select food for Wednesday</option>
+                  </select>
+                </div>
+              </div>
+              <div class="order_item">
+                <h4>Thursday</h4>
+                <div class="form_order_select" id="form_thursday">
+                  <select name="order_thursday" id="thursday">
+                    <option value="fish">Fish</option>
+                    <option value="meat">Meat</option>
+                    <option value="" selected>Select food for Thursday</option>
+                  </select>
+                </div>
+              </div>
+              <div class="order_item">
+                <h4>Friday</h4>
+                <div class="form_order_select" id="form_friday">
+                  <select name="order_friday" id="friday">
+                    <option value="fish">Fish</option>
+                    <option value="meat">Meat</option>
+                    <option value="" selected>Select food for Friday</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="totalprice">
+            <h2 class="title_totalprice">The total is: 10€</h2>
+            <button onclick="orderSend()" id="btn_order">
+              Submit your order
+            </button>
+          </div>
+        </form>
+      </article>
+    </section>
     <!-- Section 4 - Schedule End -->
 
     <!-- Footer Start -->
     <footer class="footer">
-      
       <img src="./img/icon.svg" alt="Logo" class="footer_logo" />
       <p class="footer_copyright">
         &copy; Copyright by
@@ -204,9 +206,19 @@
         <h2 class="modal_header">Welcome</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input id="userlogin" type="text" placeholder="Enter your username" required/>
+          <input
+            id="userlogin"
+            type="text"
+            placeholder="Enter your username"
+            required
+          />
           <label>Password</label>
-          <input id="passlogin" type="password" placeholder="Enter your password" required/>
+          <input
+            id="passlogin"
+            type="password"
+            placeholder="Enter your password"
+            required
+          />
           <button onclick="login()" class="btn_login_send">Login</button>
         </div>
       </div>
@@ -214,11 +226,26 @@
         <h2 class="modal_header">Sign In</h2>
         <div class="modal_form">
           <label>UserName</label>
-          <input id="username_signin" type="text" placeholder="Set username" required/>
+          <input
+            id="username_signin"
+            type="text"
+            placeholder="Set username"
+            required
+          />
           <label>Password</label>
-          <input id="password_signin" type="password" placeholder="Set password" required/>
+          <input
+            id="password_signin"
+            type="password"
+            placeholder="Set password"
+            required
+          />
           <label>Email Address</label>
-          <input id="email_signin" type="email" placeholder="Set email" required/>
+          <input
+            id="email_signin"
+            type="email"
+            placeholder="Set email"
+            required
+          />
           <button onclick="signin()" class="btn_signin_send">Sign in</button>
         </div>
       </div>
