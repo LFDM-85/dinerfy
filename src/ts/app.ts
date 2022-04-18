@@ -189,15 +189,15 @@ const addUser = (username: string, password: string, email: string) => {
   const readUser = JSON.parse(localStorage.getItem("Users")!);
   console.log(readUser);
   const foundUser = readUser?.find((user: { email: string }) => {
-    // console.log(user, email);
-    alert("User already exist!!!");
-    exit();
-    closeModal();
-
     return user.email === email;
   });
   // console.log(foundUser);
-  if (foundUser) return;
+  if (foundUser) {
+    alert("User already exist!!!");
+    exit();
+    closeModal();
+    return;
+  }
 
   users.push({
     username,
@@ -229,6 +229,7 @@ const signin = () => {
     passwordInputSignIn.value,
     emailInputSignIn.value
   );
+  clearInputs();
 };
 
 ///////////////////////////
