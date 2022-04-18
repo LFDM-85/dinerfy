@@ -545,7 +545,7 @@ h4 {
 .order_form {
   justify-content: center;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 6rem;
 
   flex-wrap: wrap;
 }
@@ -560,7 +560,11 @@ h4 {
 }
 
 .totalprice {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 #btn_order {
   margin: 3rem;
@@ -576,7 +580,7 @@ h4 {
 .title_totalprice {
   justify-self: center;
   font-weight: 900;
-  font-size: 4rem;
+  font-size: 450%;
   padding-top: 4rem;
 }
 .footer {

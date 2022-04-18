@@ -105,24 +105,24 @@ document.addEventListener("keydown", (e) => {
         closeModal();
     }
 });
-plates.forEach(({ Day, Type, img, Name, Price }) => {
+plates.forEach(({ Day, img, Name, Price }) => {
     const menuday = document.createElement("div");
     menuday.classList.add("flex-container");
     menuday.innerHTML = `
         <div class='flex-items' >
-            <h4>${Day}-${Type}</h4>
-            <div class="box_container">
-          <div class="container">
-            <img
-              class="menu_img"
-              src="${img}"
-              alt=""
-            />
-          </div>
+          <h4>${Day}</h4>
+          <div class="box_container">
+            <div class="container">
+              <img
+                class="menu_img"
+                src="${img}"
+                alt=""
+              />
+            </div>
             <span>${Name}</span>
             <span>${Price},00€</span>
           </div>
-          </div>  
+        </div>
         `;
     menuItems.prepend(menuday);
 });
@@ -144,6 +144,7 @@ const exit = () => {
     login_nav.classList.remove("hidden");
     signin_nav.classList.remove("hidden");
     logout_nav.classList.add("hidden");
+    sessionStorage.removeItem("CurrUser");
 };
 const addUser = (username, password, email) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
@@ -165,6 +166,7 @@ const addUser = (username, password, email) => {
         pay: 0,
     });
     localStorage.setItem("Users", JSON.stringify(users));
+    sessionStorage.setItem("CurrUser", JSON.stringify(users));
     clearInputs();
     enter();
     closeModal();
@@ -211,6 +213,9 @@ const loginUser = (username, password) => {
 const login = () => {
     loginUser(userlogin.value, passlogin.value);
     clearInputs();
+};
+const getSelectedValue = (e) => {
+    console.log(e.value);
 };
 const orderSend = () => {
     console.log(localStorage);
