@@ -98,9 +98,7 @@ interface User {
   username: string;
   password: string;
   email: string;
-  chosenDays: string[];
-  chosenMeals: string[];
-  pay: number;
+  choices: Object[];
 }
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
@@ -206,9 +204,7 @@ const addUser = (username: string, password: string, email: string) => {
       username,
       password,
       email,
-      chosenDays: [],
-      chosenMeals: [],
-      pay: 0,
+      choices: [],
     });
 
     localStorage.setItem("Users", JSON.stringify(users));
@@ -286,43 +282,30 @@ const login = () => {
 
 ////////////////////////////
 // ORDER
-let totalprice = 0;
-let days: string[] = [];
-let meals: string[] = [];
-let price = 0;
-let dayWeek: string;
-let meal: string;
-const totalpriceDiv = document.querySelector(".totalprice");
-const totalpriceTitle = document.createElement("h2");
+
 const getvalue = (e: any, day: string) => {
-  plates.forEach((plate) => {
-    if (day === plate.Day && e.value === plate.Type) {
-      price = plate.Price;
-      dayWeek = plate.Day;
-      meal = plate.Type;
-
-      days.push(dayWeek);
-      meals.push(meal);
-      totalprice += price;
-
-      totalpriceTitle.remove();
-      totalpriceTitle.classList.add("title_totalprice");
-      totalpriceTitle.innerText = `The total is: ${totalprice.toFixed(2)}€`;
-      totalpriceDiv?.prepend(totalpriceTitle);
-      return;
-    }
-    return;
+  const foundPlate = plates.find((plate) => {
+    return day === plate.Day && e.value === plate.Type;
   });
+  // console.log(foundplate);
 
-  return;
+  if (foundPlate) {
+    const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
+    CurrUser.choices.push({
+      chosenDay: foundPlate.Day,
+      chosenMeal: foundPlate.Type,
+      price: foundPlate.Price,
+    });
+    localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
+  }
 };
 
 const orderSend = () => {
-  const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
-  CurrUser.chosenDays = days;
-  CurrUser.chosenMeals = meals;
-  CurrUser.pay = totalprice;
-  console.log(CurrUser);
-  localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
-  // Saveme days, meals and totalprice in the user
+  //   const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
+  //   CurrUser.chosenDays = days;
+  //   CurrUser.chosenMeals = meals;
+  //   CurrUser.pay = totalprice;
+  //   console.log(CurrUser);
+  //   localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
+  //   // Saveme days, meals and totalprice in the user
 };

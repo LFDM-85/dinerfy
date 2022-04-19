@@ -161,9 +161,7 @@ const addUser = (username, password, email) => {
             username,
             password,
             email,
-            chosenDays: [],
-            chosenMeals: [],
-            pay: 0,
+            choices: [],
         });
         localStorage.setItem("Users", JSON.stringify(users));
         clearInputs();
@@ -214,38 +212,19 @@ const login = () => {
         enter();
     }
 })();
-let totalprice = 0;
-let days = [];
-let meals = [];
-let price = 0;
-let dayWeek;
-let meal;
-const totalpriceDiv = document.querySelector(".totalprice");
-const totalpriceTitle = document.createElement("h2");
 const getvalue = (e, day) => {
-    plates.forEach((plate) => {
-        if (day === plate.Day && e.value === plate.Type) {
-            price = plate.Price;
-            dayWeek = plate.Day;
-            meal = plate.Type;
-            days.push(dayWeek);
-            meals.push(meal);
-            totalprice += price;
-            totalpriceTitle.remove();
-            totalpriceTitle.classList.add("title_totalprice");
-            totalpriceTitle.innerText = `The total is: ${totalprice.toFixed(2)}€`;
-            totalpriceDiv === null || totalpriceDiv === void 0 ? void 0 : totalpriceDiv.prepend(totalpriceTitle);
-            return;
-        }
-        return;
+    const foundPlate = plates.find((plate) => {
+        return day === plate.Day && e.value === plate.Type;
     });
-    return;
+    if (foundPlate) {
+        const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
+        CurrUser.choices.push({
+            chosenDay: foundPlate.Day,
+            chosenMeal: foundPlate.Type,
+            price: foundPlate.Price,
+        });
+        localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
+    }
 };
 const orderSend = () => {
-    const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
-    CurrUser.chosenDays = days;
-    CurrUser.chosenMeals = meals;
-    CurrUser.pay = totalprice;
-    console.log(CurrUser);
-    localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
 };
