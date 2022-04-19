@@ -188,32 +188,24 @@ const logout = () => {
 };
 const loginUser = (username, password) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
-    const foundUsername = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
-        return user.username === username;
+    const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+        return user.username === username && user.password === password;
     });
-    const foundPassword = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
-        return user.password === password;
-    });
-    if (!foundUsername && !foundPassword) {
-        alert("User does not exist!!!");
-        exit();
-        closeModal();
-        return;
-    }
-    if (foundUsername && foundPassword) {
+    if (foundUser) {
         clearInputs();
         enter();
         closeModal();
         return;
     }
-    clearInputs();
     alert("Username or password are incorrect!!! Try again!");
+    exit();
+    clearInputs();
     closeModal();
     return;
 };
 const login = () => {
-    loginUser(userlogin.value, passlogin.value);
     clearInputs();
+    loginUser(userlogin.value, passlogin.value);
 };
 const getvalue = () => {
 };
