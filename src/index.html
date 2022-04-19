@@ -117,68 +117,66 @@
       <h3>Order - ORDER YOUR TASTY FOODS</h3>
 
       <article class="order">
-        <form action="#">
-          <div class="flexcontainer">
-            <div class="order_form">
-              <div class="order_item">
-                <h4>Monday</h4>
-                <div class="form_order_select" id="form_monday">
-                  <select name="order_monday" id="monday">
-                    <option value="fish">Fish</option>
-                    <option value="meat">Meat</option>
-                    <option value="" selected>Select food for Monday</option>
-                  </select>
-                </div>
+        <div class="flexcontainer">
+          <div class="order_form">
+            <div class="order_item">
+              <h4>Monday</h4>
+              <div class="form_order_select" id="form_monday">
+                <select name="order_monday" id="monday" onchange="getvalue()">
+                  <option value="fish">Fish</option>
+                  <option value="meat">Meat</option>
+                  <option value="" selected>Select food for Monday</option>
+                </select>
               </div>
-              <div class="order_item">
-                <h4>Tuesday</h4>
-                <div class="form_order_select" id="form_tuesday">
-                  <select name="order_tuesday" id="tuesday">
-                    <option value="fish">Fish</option>
-                    <option value="meat">Meat</option>
-                    <option value="" selected>Select food for Tuesday</option>
-                  </select>
-                </div>
+            </div>
+            <div class="order_item">
+              <h4>Tuesday</h4>
+              <div class="form_order_select" id="form_tuesday">
+                <select name="order_tuesday" id="tuesday">
+                  <option value="fish">Fish</option>
+                  <option value="meat">Meat</option>
+                  <option value="" selected>Select food for Tuesday</option>
+                </select>
               </div>
-              <div class="order_item">
-                <h4>Wednesday</h4>
-                <div class="form_order_select" id="form_wednesday">
-                  <select name="order_wednesday" id="wednesday">
-                    <option value="fish">Fish</option>
-                    <option value="meat">Meat</option>
-                    <option value="" selected>Select food for Wednesday</option>
-                  </select>
-                </div>
+            </div>
+            <div class="order_item">
+              <h4>Wednesday</h4>
+              <div class="form_order_select" id="form_wednesday">
+                <select name="order_wednesday" id="wednesday">
+                  <option value="fish">Fish</option>
+                  <option value="meat">Meat</option>
+                  <option value="" selected>Select food for Wednesday</option>
+                </select>
               </div>
-              <div class="order_item">
-                <h4>Thursday</h4>
-                <div class="form_order_select" id="form_thursday">
-                  <select name="order_thursday" id="thursday">
-                    <option value="fish">Fish</option>
-                    <option value="meat">Meat</option>
-                    <option value="" selected>Select food for Thursday</option>
-                  </select>
-                </div>
+            </div>
+            <div class="order_item">
+              <h4>Thursday</h4>
+              <div class="form_order_select" id="form_thursday">
+                <select name="order_thursday" id="thursday">
+                  <option value="fish">Fish</option>
+                  <option value="meat">Meat</option>
+                  <option value="" selected>Select food for Thursday</option>
+                </select>
               </div>
-              <div class="order_item">
-                <h4>Friday</h4>
-                <div class="form_order_select" id="form_friday">
-                  <select name="order_friday" id="friday">
-                    <option value="fish">Fish</option>
-                    <option value="meat">Meat</option>
-                    <option value="" selected>Select food for Friday</option>
-                  </select>
-                </div>
+            </div>
+            <div class="order_item">
+              <h4>Friday</h4>
+              <div class="form_order_select" id="form_friday">
+                <select name="order_friday" id="friday">
+                  <option value="fish">Fish</option>
+                  <option value="meat">Meat</option>
+                  <option value="" selected>Select food for Friday</option>
+                </select>
               </div>
             </div>
           </div>
-          <div class="totalprice">
-            <h2 class="title_totalprice">The total is: 10€</h2>
-            <button onclick="orderSend()" id="btn_order">
-              Submit your order
-            </button>
-          </div>
-        </form>
+        </div>
+        <div class="totalprice">
+          <h2 class="title_totalprice">The total is: 10€</h2>
+          <button onclick="orderSend()" id="btn_order">
+            Submit your order
+          </button>
+        </div>
       </article>
     </section>
     <!-- Section 4 - Schedule End -->

@@ -215,9 +215,7 @@ const login = () => {
     loginUser(userlogin.value, passlogin.value);
     clearInputs();
 };
-const getSelectedValue = (e) => {
-    console.log(e.value);
+const getvalue = () => {
 };
 const orderSend = () => {
-    console.log(localStorage);
 };

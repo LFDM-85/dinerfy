@@ -281,11 +281,10 @@ const login = () => {
 
 ////////////////////////////
 // ORDER
-
-const getSelectedValue = (e: any) => {
-  console.log(e.value);
+const getvalue = () => {
+  // Read meals and update totalprice
 };
 
 const orderSend = () => {
-  console.log(localStorage);
+  // Saveme days, meals and totalprice in the user
 };
