@@ -148,7 +148,7 @@ const exit = () => {
 const addUser = (username, password, email) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
     const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
-        return user.email === email;
+        return user.username === username;
     });
     if (foundUser) {
         alert("User already exist!!!");
@@ -185,6 +185,7 @@ const signin = () => {
 const logout = () => {
     if (confirm("Do you sure you want to leave?"))
         exit();
+    localStorage.removeItem("CurrUser");
 };
 const loginUser = (username, password) => {
     const readUser = JSON.parse(localStorage.getItem("Users"));
@@ -192,6 +193,8 @@ const loginUser = (username, password) => {
         return user.username === username && user.password === password;
     });
     if (foundUser) {
+        localStorage.setItem("CurrUser", JSON.stringify(foundUser));
+        console.log(foundUser);
         clearInputs();
         enter();
         closeModal();

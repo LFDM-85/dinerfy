@@ -190,8 +190,8 @@ const exit = () => {
 const addUser = (username: string, password: string, email: string) => {
   const readUser = JSON.parse(localStorage.getItem("Users")!);
   // console.log(readUser);
-  const foundUser = readUser?.find((user: { email: string }) => {
-    return user.email === email;
+  const foundUser = readUser?.find((user: { username: string }) => {
+    return user.username === username;
   });
   // console.log(foundUser);
   if (foundUser) {
@@ -241,6 +241,7 @@ const signin = () => {
 //LOGOUT
 const logout = () => {
   if (confirm("Do you sure you want to leave?")) exit();
+  localStorage.removeItem("CurrUser");
 };
 
 ///////////////////////////
@@ -255,6 +256,8 @@ const loginUser = (username: string, password: string) => {
   );
 
   if (foundUser) {
+    localStorage.setItem("CurrUser", JSON.stringify(foundUser));
+    console.log(foundUser);
     clearInputs();
     enter();
     closeModal();
