@@ -210,6 +210,8 @@ const login = () => {
     loginUser(userlogin.value, passlogin.value);
 };
 let totalprice = 0;
+let days = [];
+let meals = [];
 let price = 0;
 let dayWeek;
 let meal;
@@ -221,6 +223,8 @@ const getvalue = (e, day) => {
             price = plate.Price;
             dayWeek = plate.Day;
             meal = plate.Type;
+            days.push(dayWeek);
+            meals.push(meal);
             totalprice += price;
             totalpriceTitle.remove();
             totalpriceTitle.classList.add("title_totalprice");
@@ -233,9 +237,10 @@ const getvalue = (e, day) => {
     return;
 };
 const orderSend = () => {
-    const ordersendCurrUser = JSON.parse(localStorage.getItem("CurrUser"));
-    ordersendCurrUser.chosenDays.push(dayWeek);
-    ordersendCurrUser.chosenMeals.push(meal);
-    ordersendCurrUser.pay = totalprice;
-    console.log(ordersendCurrUser);
+    const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
+    CurrUser.chosenDays = days;
+    CurrUser.chosenMeals = meals;
+    CurrUser.pay = totalprice;
+    console.log(CurrUser);
+    localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
 };

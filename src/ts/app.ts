@@ -189,6 +189,7 @@ const exit = () => {
 
 const addUser = (username: string, password: string, email: string) => {
   const readUser = JSON.parse(localStorage.getItem("Users")!);
+  // console.log(readUser);
   const foundUser = readUser?.find((user: { username: string }) => {
     return user.username === username;
   });
@@ -256,6 +257,7 @@ const loginUser = (username: string, password: string) => {
 
   if (foundUser) {
     localStorage.setItem("CurrUser", JSON.stringify(foundUser));
+    // console.log(foundUser);
     clearInputs();
     enter();
     closeModal();
@@ -277,7 +279,8 @@ const login = () => {
 ////////////////////////////
 // ORDER
 let totalprice = 0;
-
+let days: string[] = [];
+let meals: string[] = [];
 let price = 0;
 let dayWeek: string;
 let meal: string;
@@ -290,6 +293,8 @@ const getvalue = (e: any, day: string) => {
       dayWeek = plate.Day;
       meal = plate.Type;
 
+      days.push(dayWeek);
+      meals.push(meal);
       totalprice += price;
 
       totalpriceTitle.remove();
@@ -305,10 +310,11 @@ const getvalue = (e: any, day: string) => {
 };
 
 const orderSend = () => {
-  const ordersendCurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
-  ordersendCurrUser.chosenDays.push(dayWeek);
-  ordersendCurrUser.chosenMeals.push(meal);
-  ordersendCurrUser.pay = totalprice;
-  console.log(ordersendCurrUser);
+  const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
+  CurrUser.chosenDays = days;
+  CurrUser.chosenMeals = meals;
+  CurrUser.pay = totalprice;
+  console.log(CurrUser);
+  localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
   // Saveme days, meals and totalprice in the user
 };
