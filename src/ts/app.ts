@@ -277,6 +277,14 @@ const login = () => {
 };
 
 ////////////////////////////
+// CURRENT USER LOGGED IN???
+(function () {
+  if (JSON.parse(localStorage.getItem("CurrUser")!)) {
+    enter();
+  }
+})();
+
+////////////////////////////
 // ORDER
 let totalprice = 0;
 let days: string[] = [];

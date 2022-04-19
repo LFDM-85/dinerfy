@@ -209,6 +209,11 @@ const login = () => {
     clearInputs();
     loginUser(userlogin.value, passlogin.value);
 };
+(function () {
+    if (JSON.parse(localStorage.getItem("CurrUser"))) {
+        enter();
+    }
+})();
 let totalprice = 0;
 let days = [];
 let meals = [];
