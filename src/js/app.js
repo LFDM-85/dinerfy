@@ -194,7 +194,6 @@ const loginUser = (username, password) => {
     });
     if (foundUser) {
         localStorage.setItem("CurrUser", JSON.stringify(foundUser));
-        console.log(foundUser);
         clearInputs();
         enter();
         closeModal();
@@ -210,7 +209,33 @@ const login = () => {
     clearInputs();
     loginUser(userlogin.value, passlogin.value);
 };
-const getvalue = () => {
+let totalprice = 0;
+let price = 0;
+let dayWeek;
+let meal;
+const totalpriceDiv = document.querySelector(".totalprice");
+const totalpriceTitle = document.createElement("h2");
+const getvalue = (e, day) => {
+    plates.forEach((plate) => {
+        if (day === plate.Day && e.value === plate.Type) {
+            price = plate.Price;
+            dayWeek = plate.Day;
+            meal = plate.Type;
+            totalprice += price;
+            totalpriceTitle.remove();
+            totalpriceTitle.classList.add("title_totalprice");
+            totalpriceTitle.innerText = `The total is: ${totalprice.toFixed(2)}€`;
+            totalpriceDiv === null || totalpriceDiv === void 0 ? void 0 : totalpriceDiv.prepend(totalpriceTitle);
+            return;
+        }
+        return;
+    });
+    return;
 };
 const orderSend = () => {
+    const ordersendCurrUser = JSON.parse(localStorage.getItem("CurrUser"));
+    ordersendCurrUser.chosenDays.push(dayWeek);
+    ordersendCurrUser.chosenMeals.push(meal);
+    ordersendCurrUser.pay = totalprice;
+    console.log(ordersendCurrUser);
 };
