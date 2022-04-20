@@ -165,6 +165,7 @@ const addUser = (username, password, email) => {
             total: 0,
         });
         localStorage.setItem("Users", JSON.stringify(users));
+        alert("User added. Please login to proced");
         clearInputs();
         enter();
         closeModal();
@@ -249,4 +250,5 @@ const getvalue = (e, day) => {
     showTotal(CurrUser.choices);
 };
 const orderSend = () => {
+    alert("Your order was sent. Thank you ☺️");
 };

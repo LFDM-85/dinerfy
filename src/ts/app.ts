@@ -211,6 +211,7 @@ const addUser = (username: string, password: string, email: string) => {
 
     localStorage.setItem("Users", JSON.stringify(users));
 
+    alert("User added. Please login to proced");
     clearInputs();
     enter();
     closeModal();
@@ -332,4 +333,5 @@ const getvalue = (e: any, day: string) => {
 
 const orderSend = () => {
   // const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
+  alert("Your order was sent. Thank you ☺️");
 };
