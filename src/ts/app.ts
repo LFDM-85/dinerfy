@@ -286,6 +286,8 @@ const login = () => {
 ////////////////////////////
 // ORDER
 
+const totalPriceTitle = document.createElement("h2");
+const divTotalPrice = document.querySelector(".totalprice");
 const showTotal = (arr: []) => {
   let totalPrice: number = 0;
   arr.forEach((choice: { price: number }) => {
@@ -294,11 +296,8 @@ const showTotal = (arr: []) => {
   });
   console.log(totalPrice);
 
-  const totalPriceTitle = document.createElement("h2");
-  const divTotalPrice = document.querySelector(".totalprice");
   totalPriceTitle.classList.add("title_totalprice");
   totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
-  totalPriceTitle?.remove();
   divTotalPrice?.prepend(totalPriceTitle);
 };
 
@@ -327,15 +326,10 @@ const getvalue = (e: any, day: string) => {
   }
   ///////////////////////////////////////////////
   // Show total
-  showTotal(CurrUser.choices);
 };
 
 const orderSend = () => {
-  //   const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
-  //   CurrUser.chosenDays = days;
-  //   CurrUser.chosenMeals = meals;
-  //   CurrUser.pay = totalprice;
-  //   console.log(CurrUser);
-  //   localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
-  //   // Saveme days, meals and totalprice in the user
+  const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
+  totalPriceTitle?.remove();
+  showTotal(CurrUser.choices);
 };

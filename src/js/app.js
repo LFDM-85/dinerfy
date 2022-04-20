@@ -214,17 +214,16 @@ const login = () => {
         enter();
     }
 })();
+const totalPriceTitle = document.createElement("h2");
+const divTotalPrice = document.querySelector(".totalprice");
 const showTotal = (arr) => {
     let totalPrice = 0;
     arr.forEach((choice) => {
         totalPrice += choice.price;
     });
     console.log(totalPrice);
-    const totalPriceTitle = document.createElement("h2");
-    const divTotalPrice = document.querySelector(".totalprice");
     totalPriceTitle.classList.add("title_totalprice");
     totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
-    totalPriceTitle === null || totalPriceTitle === void 0 ? void 0 : totalPriceTitle.remove();
     divTotalPrice === null || divTotalPrice === void 0 ? void 0 : divTotalPrice.prepend(totalPriceTitle);
 };
 const getvalue = (e, day) => {
@@ -246,7 +245,9 @@ const getvalue = (e, day) => {
         });
         localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
     }
-    showTotal(CurrUser.choices);
 };
 const orderSend = () => {
+    const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
+    totalPriceTitle === null || totalPriceTitle === void 0 ? void 0 : totalPriceTitle.remove();
+    showTotal(CurrUser.choices);
 };

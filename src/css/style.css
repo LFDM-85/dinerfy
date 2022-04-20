@@ -573,6 +573,7 @@ h4 {
   background-color: var(--color-primary);
   color: #f3f3f3;
   font-weight: 900;
+  font-size: 2rem;
 }
 #btn_order:hover {
   background-color: var(--color-primary-darkest);
