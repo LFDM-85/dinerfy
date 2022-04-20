@@ -94,11 +94,17 @@ const emailInputSignIn = document.querySelector(
 const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
 const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
 
+interface Choices {
+  chosenDay: string;
+  chosenMeal: string;
+  price: number;
+}
+
 interface User {
   username: string;
   password: string;
   email: string;
-  choices: Object[];
+  choices: Choices[];
   total: number;
 }
 
@@ -288,10 +294,9 @@ const login = () => {
 
 const totalPriceTitle = document.createElement("h2");
 const divTotalPrice = document.querySelector(".totalprice");
-const showTotal = (arr: []) => {
+const showTotal = (arr: Choices[]) => {
   let totalPrice: number = 0;
   arr.forEach((choice: { price: number }) => {
-    // const price = choice.price;
     totalPrice += choice.price;
   });
   console.log(totalPrice);
@@ -301,33 +306,47 @@ const showTotal = (arr: []) => {
   divTotalPrice?.prepend(totalPriceTitle);
 };
 
-const getvalue = (e: any, day: string) => {
+const getvalue = (e: { value: string }, day: string) => {
+  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+
+  // Check if specific plates of the day have been selected
   const foundPlate = plates.find((plate) => {
     return day === plate.Day && e.value === plate.Type;
   });
-  console.log(foundPlate);
-  const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
 
+  console.log("FoundPlate: ", foundPlate);
+
+  // Check that if plate is repeated, if it is, change the dish in the same index; put the selected in the correct option
   if (foundPlate) {
-    // Verify if current day/plate exists and if exists will remove the entry
-    const index = CurrUser.choices
-      .map((i: { chosenDay: string }) => i.chosenDay)
-      .indexOf(foundPlate.Day);
-    if (index !== -1) CurrUser.choices.splice(index, 1);
+    const index = currUser.choices.findIndex(
+      (choice) => day === choice.chosenDay
+    );
 
-    // Adds new entry
-    CurrUser.choices.push({
-      chosenDay: foundPlate.Day,
-      chosenMeal: foundPlate.Type,
-      price: foundPlate.Price,
-    });
+    console.log(index);
+    if (index !== -1)
+      currUser.choices[index] = {
+        chosenDay: foundPlate.Day,
+        chosenMeal: foundPlate.Type,
+        price: foundPlate.Price,
+      };
+    if (index === -1)
+      currUser.choices.push({
+        chosenDay: foundPlate.Day,
+        chosenMeal: foundPlate.Type,
+        price: foundPlate.Price,
+      });
 
-    localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
+    localStorage.setItem("CurrUser", JSON.stringify(currUser));
   }
-  totalPriceTitle?.remove();
-  showTotal(CurrUser.choices);
-  ///////////////////////////////////////////////
-  // Show total
+  // If the user removes the selection of the day, remove the day/plate
+  if (foundPlate === undefined) {
+    const index = currUser.choices.findIndex(
+      (choice) => day === choice.chosenDay
+    );
+    console.log("index undefined", index);
+    if (index !== -1) currUser.choices.splice(index, 1);
+    localStorage.setItem("CurrUser", JSON.stringify(currUser));
+  }
 };
 
 const orderSend = () => {

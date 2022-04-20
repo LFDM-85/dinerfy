@@ -228,26 +228,35 @@ const showTotal = (arr) => {
     divTotalPrice === null || divTotalPrice === void 0 ? void 0 : divTotalPrice.prepend(totalPriceTitle);
 };
 const getvalue = (e, day) => {
+    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
     const foundPlate = plates.find((plate) => {
         return day === plate.Day && e.value === plate.Type;
     });
-    console.log(foundPlate);
-    const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
+    console.log("FoundPlate: ", foundPlate);
     if (foundPlate) {
-        const index = CurrUser.choices
-            .map((i) => i.chosenDay)
-            .indexOf(foundPlate.Day);
+        const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
+        console.log(index);
         if (index !== -1)
-            CurrUser.choices.splice(index, 1);
-        CurrUser.choices.push({
-            chosenDay: foundPlate.Day,
-            chosenMeal: foundPlate.Type,
-            price: foundPlate.Price,
-        });
-        localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
+            currUser.choices[index] = {
+                chosenDay: foundPlate.Day,
+                chosenMeal: foundPlate.Type,
+                price: foundPlate.Price,
+            };
+        if (index === -1)
+            currUser.choices.push({
+                chosenDay: foundPlate.Day,
+                chosenMeal: foundPlate.Type,
+                price: foundPlate.Price,
+            });
+        localStorage.setItem("CurrUser", JSON.stringify(currUser));
     }
-    totalPriceTitle === null || totalPriceTitle === void 0 ? void 0 : totalPriceTitle.remove();
-    showTotal(CurrUser.choices);
+    if (foundPlate === undefined) {
+        const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
+        console.log("index undefined", index);
+        if (index !== -1)
+            currUser.choices.splice(index, 1);
+        localStorage.setItem("CurrUser", JSON.stringify(currUser));
+    }
 };
 const orderSend = () => {
     alert("Your order was sent. Thank you ☺️");
