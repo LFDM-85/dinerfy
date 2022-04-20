@@ -324,12 +324,12 @@ const getvalue = (e: any, day: string) => {
 
     localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
   }
+  totalPriceTitle?.remove();
+  showTotal(CurrUser.choices);
   ///////////////////////////////////////////////
   // Show total
 };
 
 const orderSend = () => {
-  const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
-  totalPriceTitle?.remove();
-  showTotal(CurrUser.choices);
+  // const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
 };

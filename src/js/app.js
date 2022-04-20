@@ -245,9 +245,8 @@ const getvalue = (e, day) => {
         });
         localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
     }
-};
-const orderSend = () => {
-    const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
     totalPriceTitle === null || totalPriceTitle === void 0 ? void 0 : totalPriceTitle.remove();
     showTotal(CurrUser.choices);
+};
+const orderSend = () => {
 };
