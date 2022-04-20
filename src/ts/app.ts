@@ -286,6 +286,22 @@ const login = () => {
 ////////////////////////////
 // ORDER
 
+const showTotal = (arr: []) => {
+  let totalPrice: number = 0;
+  arr.forEach((choice: { price: number }) => {
+    // const price = choice.price;
+    totalPrice += choice.price;
+  });
+  console.log(totalPrice);
+
+  const totalPriceTitle = document.createElement("h2");
+  const divTotalPrice = document.querySelector(".totalprice");
+  totalPriceTitle.classList.add("title_totalprice");
+  totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
+  totalPriceTitle?.remove();
+  divTotalPrice?.prepend(totalPriceTitle);
+};
+
 const getvalue = (e: any, day: string) => {
   const foundPlate = plates.find((plate) => {
     return day === plate.Day && e.value === plate.Type;
@@ -309,6 +325,9 @@ const getvalue = (e: any, day: string) => {
 
     localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
   }
+  ///////////////////////////////////////////////
+  // Show total
+  showTotal(CurrUser.choices);
 };
 
 const orderSend = () => {
