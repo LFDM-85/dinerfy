@@ -287,10 +287,17 @@ const getvalue = (e: any, day: string) => {
   const foundPlate = plates.find((plate) => {
     return day === plate.Day && e.value === plate.Type;
   });
-  // console.log(foundplate);
+  console.log(foundPlate);
+  const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
 
   if (foundPlate) {
-    const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
+    // Verify if current day/plate exists and if exists will remove the entry
+    const index = CurrUser.choices
+      .map((i: { chosenDay: string }) => i.chosenDay)
+      .indexOf(foundPlate.Day);
+    if (index !== -1) CurrUser.choices.splice(index, 1);
+
+    // Adds new entry
     CurrUser.choices.push({
       chosenDay: foundPlate.Day,
       chosenMeal: foundPlate.Type,

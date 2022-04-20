@@ -216,8 +216,14 @@ const getvalue = (e, day) => {
     const foundPlate = plates.find((plate) => {
         return day === plate.Day && e.value === plate.Type;
     });
+    console.log(foundPlate);
+    const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
     if (foundPlate) {
-        const CurrUser = JSON.parse(localStorage.getItem("CurrUser"));
+        const index = CurrUser.choices
+            .map((i) => i.chosenDay)
+            .indexOf(foundPlate.Day);
+        if (index !== -1)
+            CurrUser.choices.splice(index, 1);
         CurrUser.choices.push({
             chosenDay: foundPlate.Day,
             chosenMeal: foundPlate.Type,
