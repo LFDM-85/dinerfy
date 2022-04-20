@@ -317,36 +317,32 @@ const getvalue = (e: { value: string }, day: string) => {
   console.log("FoundPlate: ", foundPlate);
 
   // Check that if plate is repeated, if it is, change the dish in the same index; put the selected in the correct option
+  const index = currUser.choices.findIndex(
+    (choice) => day === choice.chosenDay
+  );
   if (foundPlate) {
-    const index = currUser.choices.findIndex(
-      (choice) => day === choice.chosenDay
-    );
-
     console.log(index);
-    if (index !== -1)
+    if (index !== -1) {
       currUser.choices[index] = {
         chosenDay: foundPlate.Day,
         chosenMeal: foundPlate.Type,
         price: foundPlate.Price,
       };
-    if (index === -1)
+    } else {
       currUser.choices.push({
         chosenDay: foundPlate.Day,
         chosenMeal: foundPlate.Type,
         price: foundPlate.Price,
       });
+    }
 
-    localStorage.setItem("CurrUser", JSON.stringify(currUser));
+    return localStorage.setItem("CurrUser", JSON.stringify(currUser));
   }
   // If the user removes the selection of the day, remove the day/plate
-  if (foundPlate === undefined) {
-    const index = currUser.choices.findIndex(
-      (choice) => day === choice.chosenDay
-    );
-    console.log("index undefined", index);
-    if (index !== -1) currUser.choices.splice(index, 1);
-    localStorage.setItem("CurrUser", JSON.stringify(currUser));
-  }
+
+  console.log("index undefined", index);
+  currUser.choices.splice(index, 1);
+  localStorage.setItem("CurrUser", JSON.stringify(currUser));
 };
 
 const orderSend = () => {

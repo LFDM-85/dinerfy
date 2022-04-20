@@ -233,30 +233,28 @@ const getvalue = (e, day) => {
         return day === plate.Day && e.value === plate.Type;
     });
     console.log("FoundPlate: ", foundPlate);
+    const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
     if (foundPlate) {
-        const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
         console.log(index);
-        if (index !== -1)
+        if (index !== -1) {
             currUser.choices[index] = {
                 chosenDay: foundPlate.Day,
                 chosenMeal: foundPlate.Type,
                 price: foundPlate.Price,
             };
-        if (index === -1)
+        }
+        else {
             currUser.choices.push({
                 chosenDay: foundPlate.Day,
                 chosenMeal: foundPlate.Type,
                 price: foundPlate.Price,
             });
-        localStorage.setItem("CurrUser", JSON.stringify(currUser));
+        }
+        return localStorage.setItem("CurrUser", JSON.stringify(currUser));
     }
-    if (foundPlate === undefined) {
-        const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
-        console.log("index undefined", index);
-        if (index !== -1)
-            currUser.choices.splice(index, 1);
-        localStorage.setItem("CurrUser", JSON.stringify(currUser));
-    }
+    console.log("index undefined", index);
+    currUser.choices.splice(index, 1);
+    localStorage.setItem("CurrUser", JSON.stringify(currUser));
 };
 const orderSend = () => {
     alert("Your order was sent. Thank you ☺️");
