@@ -257,7 +257,6 @@ const loginUser = (username: string, password: string) => {
 
   if (foundUser) {
     localStorage.setItem("CurrUser", JSON.stringify(foundUser));
-    // console.log(foundUser);
     clearInputs();
     enter();
     closeModal();
