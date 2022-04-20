@@ -99,6 +99,7 @@ interface User {
   password: string;
   email: string;
   choices: Object[];
+  total: number;
 }
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
@@ -205,6 +206,7 @@ const addUser = (username: string, password: string, email: string) => {
       password,
       email,
       choices: [],
+      total: 0,
     });
 
     localStorage.setItem("Users", JSON.stringify(users));
@@ -231,6 +233,7 @@ const signin = () => {
     emailInputSignIn.value
   );
   clearInputs();
+  exit();
 };
 
 ///////////////////////////
@@ -303,6 +306,7 @@ const getvalue = (e: any, day: string) => {
       chosenMeal: foundPlate.Type,
       price: foundPlate.Price,
     });
+
     localStorage.setItem("CurrUser", JSON.stringify(CurrUser));
   }
 };

@@ -162,6 +162,7 @@ const addUser = (username, password, email) => {
             password,
             email,
             choices: [],
+            total: 0,
         });
         localStorage.setItem("Users", JSON.stringify(users));
         clearInputs();
@@ -179,6 +180,7 @@ const clearInputs = () => {
 const signin = () => {
     addUser(usernameInputSignIn.value, passwordInputSignIn.value, emailInputSignIn.value);
     clearInputs();
+    exit();
 };
 const logout = () => {
     if (confirm("Do you sure you want to leave?"))
