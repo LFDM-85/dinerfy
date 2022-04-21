@@ -82,6 +82,7 @@ const emailInputSignIn = document.querySelector("#email_signin");
 const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
+console.log(users);
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
@@ -165,7 +166,7 @@ const addUser = (username, password, email) => {
             total: 0,
         });
         localStorage.setItem("Users", JSON.stringify(users));
-        alert("User added. Please login to proced");
+        alert("User added. Please login to proceed");
         clearInputs();
         enter();
         closeModal();
@@ -232,10 +233,8 @@ const getvalue = (e, day) => {
     const foundPlate = plates.find((plate) => {
         return day === plate.Day && e.value === plate.Type;
     });
-    console.log("FoundPlate: ", foundPlate);
     const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
     if (foundPlate) {
-        console.log(index);
         if (index !== -1) {
             currUser.choices[index] = {
                 chosenDay: foundPlate.Day,
@@ -258,5 +257,17 @@ const getvalue = (e, day) => {
     localStorage.setItem("CurrUser", JSON.stringify(currUser));
 };
 const orderSend = () => {
-    alert("Your order was sent. Thank you ☺️");
+    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
+    const users = JSON.parse(localStorage.getItem("Users"));
+    const foundUser = users === null || users === void 0 ? void 0 : users.find((users) => {
+        return (users.username === currUser.username &&
+            users.password === currUser.password);
+    });
+    if (foundUser) {
+        console.log(foundUser);
+        foundUser.choices = currUser.choices;
+        console.log(foundUser);
+        alert("Your order was added to the cart. Thank you ☺️");
+        localStorage.setItem("Users", JSON.stringify(users));
+    }
 };

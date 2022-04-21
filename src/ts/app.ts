@@ -110,6 +110,7 @@ interface User {
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
 const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+console.log(users);
 
 ////////////////////////////
 // Modal logic
@@ -217,7 +218,7 @@ const addUser = (username: string, password: string, email: string) => {
 
     localStorage.setItem("Users", JSON.stringify(users));
 
-    alert("User added. Please login to proced");
+    alert("User added. Please login to proceed");
     clearInputs();
     enter();
     closeModal();
@@ -292,6 +293,7 @@ const login = () => {
 ////////////////////////////
 // ORDER
 
+// Show total Price when the user make a choice
 const totalPriceTitle = document.createElement("h2");
 const divTotalPrice = document.querySelector(".totalprice");
 const showTotal = (arr: Choices[]) => {
@@ -306,6 +308,7 @@ const showTotal = (arr: Choices[]) => {
   divTotalPrice?.prepend(totalPriceTitle);
 };
 
+// Function that receive the choices from the user and then update the choices array. Can add, alter and remove meals/days
 const getvalue = (e: { value: string }, day: string) => {
   const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
 
@@ -314,21 +317,23 @@ const getvalue = (e: { value: string }, day: string) => {
     return day === plate.Day && e.value === plate.Type;
   });
 
-  console.log("FoundPlate: ", foundPlate);
+  // console.log("FoundPlate: ", foundPlate);
 
   // Check that if plate is repeated, if it is, change the dish in the same index; put the selected in the correct option
   const index = currUser.choices.findIndex(
     (choice) => day === choice.chosenDay
   );
   if (foundPlate) {
-    console.log(index);
+    // console.log(index);
     if (index !== -1) {
+      // alter selected
       currUser.choices[index] = {
         chosenDay: foundPlate.Day,
         chosenMeal: foundPlate.Type,
         price: foundPlate.Price,
       };
     } else {
+      // add selected
       currUser.choices.push({
         chosenDay: foundPlate.Day,
         chosenMeal: foundPlate.Type,
@@ -341,6 +346,7 @@ const getvalue = (e: { value: string }, day: string) => {
   }
   // If the user removes the selection of the day, remove the day/plate
 
+  // remove selected
   currUser.choices.splice(index, 1);
   showTotal(currUser.choices);
 
@@ -348,6 +354,23 @@ const getvalue = (e: { value: string }, day: string) => {
 };
 
 const orderSend = () => {
-  // const CurrUser = JSON.parse(localStorage.getItem("CurrUser")!);
-  alert("Your order was sent. Thank you ☺️");
+  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+  const users: User[] = JSON.parse(localStorage.getItem("Users")!);
+
+  const foundUser = users?.find(
+    (users: { username: string; password: string }) => {
+      return (
+        users.username === currUser.username &&
+        users.password === currUser.password
+      );
+    }
+  );
+
+  if (foundUser) {
+    console.log(foundUser);
+    foundUser!.choices = currUser.choices;
+    console.log(foundUser);
+    alert("Your order was added to the cart. Thank you ☺️");
+    localStorage.setItem("Users", JSON.stringify(users));
+  }
 };
