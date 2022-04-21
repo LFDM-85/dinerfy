@@ -250,10 +250,11 @@ const getvalue = (e, day) => {
                 price: foundPlate.Price,
             });
         }
+        showTotal(currUser.choices);
         return localStorage.setItem("CurrUser", JSON.stringify(currUser));
     }
-    console.log("index undefined", index);
     currUser.choices.splice(index, 1);
+    showTotal(currUser.choices);
     localStorage.setItem("CurrUser", JSON.stringify(currUser));
 };
 const orderSend = () => {

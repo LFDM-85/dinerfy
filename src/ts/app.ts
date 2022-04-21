@@ -335,13 +335,15 @@ const getvalue = (e: { value: string }, day: string) => {
         price: foundPlate.Price,
       });
     }
+    showTotal(currUser.choices);
 
     return localStorage.setItem("CurrUser", JSON.stringify(currUser));
   }
   // If the user removes the selection of the day, remove the day/plate
 
-  console.log("index undefined", index);
   currUser.choices.splice(index, 1);
+  showTotal(currUser.choices);
+
   localStorage.setItem("CurrUser", JSON.stringify(currUser));
 };
 
