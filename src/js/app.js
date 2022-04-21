@@ -250,16 +250,18 @@ const getvalue = (e, day) => {
             });
         }
         showTotal(currUser.choices);
-        return localStorage.setItem("CurrUser", JSON.stringify(currUser));
+        localStorage.setItem("CurrUser", JSON.stringify(currUser));
+        return updateCurrUserToUser();
     }
     currUser.choices.splice(index, 1);
     showTotal(currUser.choices);
     localStorage.setItem("CurrUser", JSON.stringify(currUser));
+    updateCurrUserToUser();
 };
-const orderSend = () => {
+const updateCurrUserToUser = () => {
     const currUser = JSON.parse(localStorage.getItem("CurrUser"));
     const users = JSON.parse(localStorage.getItem("Users"));
-    const foundUser = users === null || users === void 0 ? void 0 : users.find((users) => {
+    let foundUser = users === null || users === void 0 ? void 0 : users.find((users) => {
         return (users.username === currUser.username &&
             users.password === currUser.password);
     });
@@ -267,6 +269,8 @@ const orderSend = () => {
         console.log(foundUser);
         foundUser.choices = currUser.choices;
         console.log(foundUser);
+        console.log("Users:", users);
+        console.log("CurrUser", currUser);
         alert("Your order was added to the cart. Thank you ☺️");
         localStorage.setItem("Users", JSON.stringify(users));
     }

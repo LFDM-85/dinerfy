@@ -342,7 +342,9 @@ const getvalue = (e: { value: string }, day: string) => {
     }
     showTotal(currUser.choices);
 
-    return localStorage.setItem("CurrUser", JSON.stringify(currUser));
+    localStorage.setItem("CurrUser", JSON.stringify(currUser));
+
+    return updateCurrUserToUser();
   }
   // If the user removes the selection of the day, remove the day/plate
 
@@ -351,13 +353,14 @@ const getvalue = (e: { value: string }, day: string) => {
   showTotal(currUser.choices);
 
   localStorage.setItem("CurrUser", JSON.stringify(currUser));
+  updateCurrUserToUser();
 };
 
-const orderSend = () => {
+const updateCurrUserToUser = () => {
   const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
   const users: User[] = JSON.parse(localStorage.getItem("Users")!);
 
-  const foundUser = users?.find(
+  let foundUser = users?.find(
     (users: { username: string; password: string }) => {
       return (
         users.username === currUser.username &&
@@ -368,8 +371,10 @@ const orderSend = () => {
 
   if (foundUser) {
     console.log(foundUser);
-    foundUser!.choices = currUser.choices;
+    foundUser.choices = currUser.choices;
     console.log(foundUser);
+    console.log("Users:", users);
+    console.log("CurrUser", currUser);
     alert("Your order was added to the cart. Thank you ☺️");
     localStorage.setItem("Users", JSON.stringify(users));
   }
