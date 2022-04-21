@@ -109,7 +109,9 @@ interface User {
 }
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
+// Also currUser is created for validation
 const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
 
 ////////////////////////////
 // Modal logic
@@ -193,12 +195,9 @@ const exit = () => {
 // ADD USER
 
 const addUser = (username: string, password: string, email: string) => {
-  const readUser = JSON.parse(localStorage.getItem("Users")!);
-  // console.log(readUser);
-  const foundUser = readUser?.find((user: { username: string }) => {
+  const foundUser = users?.find((user: { username: string }) => {
     return user.username === username;
   });
-  // console.log(foundUser);
   if (foundUser) {
     alert("User already exist!!!");
     exit();
@@ -254,8 +253,7 @@ const logout = () => {
 // LOGIN
 
 const loginUser = (username: string, password: string) => {
-  const readUser = JSON.parse(localStorage.getItem("Users")!);
-  const foundUser = readUser?.find(
+  const foundUser = users?.find(
     (user: { username: string; password: string }) => {
       return user.username === username && user.password === password;
     }
@@ -309,30 +307,23 @@ const showTotal = (arr: Choices[]) => {
 
 // Function that receive the choices from the user and then update the choices array. Can add, alter and remove meals/days
 const getvalue = (e: { value: string }, day: string) => {
-  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-
   // Check if specific plates of the day have been selected
   const foundPlate = plates.find((plate) => {
     return day === plate.Day && e.value === plate.Type;
   });
-
-  // console.log("FoundPlate: ", foundPlate);
 
   // Check that if plate is repeated, if it is, change the dish in the same index; put the selected in the correct option
   const index = currUser.choices.findIndex(
     (choice) => day === choice.chosenDay
   );
   if (foundPlate) {
-    // console.log(index);
     if (index !== -1) {
-      // alter selected
       currUser.choices[index] = {
         chosenDay: foundPlate.Day,
         chosenMeal: foundPlate.Type,
         price: foundPlate.Price,
       };
     } else {
-      // add selected
       currUser.choices.push({
         chosenDay: foundPlate.Day,
         chosenMeal: foundPlate.Type,
@@ -356,9 +347,6 @@ const getvalue = (e: { value: string }, day: string) => {
 };
 
 const updateCurrUserToUser = () => {
-  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-  const users: User[] = JSON.parse(localStorage.getItem("Users")!);
-
   const verify = users.map((x) =>
     x.username === currUser.username && x.password === currUser.password
       ? currUser
@@ -366,23 +354,4 @@ const updateCurrUserToUser = () => {
   );
 
   localStorage.setItem("Users", JSON.stringify(verify));
-
-  // let foundUser = users?.find(
-  //   (users: { username: string; password: string }) => {
-  //     return (
-  //       users.username === currUser.username &&
-  //       users.password === currUser.password
-  //     );
-  //   }
-  // );
-
-  // if (foundUser) {
-  //   console.log(foundUser);
-  //   foundUser.choices = currUser.choices;
-  //   console.log(foundUser);
-  //   console.log("Users:", users);
-  //   console.log("CurrUser", currUser);
-  //   alert("Your order was added to the cart. Thank you ☺️");
-  //   localStorage.setItem("Users", JSON.stringify(users));
-  // }
 };

@@ -82,6 +82,7 @@ const emailInputSignIn = document.querySelector("#email_signin");
 const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
+const currUser = JSON.parse(localStorage.getItem("CurrUser"));
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
@@ -146,8 +147,7 @@ const exit = () => {
     logout_nav.classList.add("hidden");
 };
 const addUser = (username, password, email) => {
-    const readUser = JSON.parse(localStorage.getItem("Users"));
-    const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+    const foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
         return user.username === username;
     });
     if (foundUser) {
@@ -189,8 +189,7 @@ const logout = () => {
     localStorage.removeItem("CurrUser");
 };
 const loginUser = (username, password) => {
-    const readUser = JSON.parse(localStorage.getItem("Users"));
-    const foundUser = readUser === null || readUser === void 0 ? void 0 : readUser.find((user) => {
+    const foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
         return user.username === username && user.password === password;
     });
     if (foundUser) {
@@ -228,7 +227,6 @@ const showTotal = (arr) => {
     divTotalPrice === null || divTotalPrice === void 0 ? void 0 : divTotalPrice.prepend(totalPriceTitle);
 };
 const getvalue = (e, day) => {
-    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
     const foundPlate = plates.find((plate) => {
         return day === plate.Day && e.value === plate.Type;
     });
@@ -258,8 +256,6 @@ const getvalue = (e, day) => {
     updateCurrUserToUser();
 };
 const updateCurrUserToUser = () => {
-    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
-    const users = JSON.parse(localStorage.getItem("Users"));
     const verify = users.map((x) => x.username === currUser.username && x.password === currUser.password
         ? currUser
         : x);
