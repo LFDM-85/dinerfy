@@ -93,6 +93,8 @@ const emailInputSignIn = document.querySelector(
 ) as HTMLInputElement;
 const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
 const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
+const totalPriceTitle = document.createElement("h2");
+const divTotalPrice = document.querySelector(".totalprice");
 
 interface Choices {
   chosenDay: string;
@@ -242,6 +244,31 @@ const signin = () => {
   exit();
 };
 
+//////////////////////////
+// Show total Price when the user make a choice
+const showTotal = (arr: Choices[]) => {
+  let totalPrice: number = 0;
+  arr.forEach((choice: { price: number }) => {
+    totalPrice += choice.price;
+  });
+
+  totalPriceTitle.classList.add("title_totalprice");
+  totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
+  divTotalPrice?.prepend(totalPriceTitle);
+};
+
+///////////////////////////
+// select validation and attribution
+const selected = (arr: Choices[]) => {
+  arr.forEach((choice) => {
+    const weekday = document.querySelector(
+      `#${choice.chosenDay.toLowerCase()}`
+    ) as HTMLSelectElement;
+    weekday.value = choice.chosenMeal;
+    console.log(weekday);
+  });
+};
+
 ///////////////////////////
 //LOGOUT
 const logout = () => {
@@ -264,6 +291,9 @@ const loginUser = (username: string, password: string) => {
     clearInputs();
     enter();
     closeModal();
+    showTotal(currUser.choices);
+    selected(currUser.choices);
+
     return;
   }
 
@@ -289,21 +319,6 @@ const login = () => {
 
 ////////////////////////////
 // ORDER
-
-// Show total Price when the user make a choice
-const totalPriceTitle = document.createElement("h2");
-const divTotalPrice = document.querySelector(".totalprice");
-const showTotal = (arr: Choices[]) => {
-  let totalPrice: number = 0;
-  arr.forEach((choice: { price: number }) => {
-    totalPrice += choice.price;
-  });
-  console.log(totalPrice);
-
-  totalPriceTitle.classList.add("title_totalprice");
-  totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
-  divTotalPrice?.prepend(totalPriceTitle);
-};
 
 // Function that receive the choices from the user and then update the choices array. Can add, alter and remove meals/days
 const getvalue = (e: { value: string }, day: string) => {

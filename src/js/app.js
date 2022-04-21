@@ -81,6 +81,8 @@ const passwordInputSignIn = document.querySelector("#password_signin");
 const emailInputSignIn = document.querySelector("#email_signin");
 const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
+const totalPriceTitle = document.createElement("h2");
+const divTotalPrice = document.querySelector(".totalprice");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
 const currUser = JSON.parse(localStorage.getItem("CurrUser"));
 const openModal = (mode) => {
@@ -183,6 +185,22 @@ const signin = () => {
     clearInputs();
     exit();
 };
+const showTotal = (arr) => {
+    let totalPrice = 0;
+    arr.forEach((choice) => {
+        totalPrice += choice.price;
+    });
+    totalPriceTitle.classList.add("title_totalprice");
+    totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
+    divTotalPrice === null || divTotalPrice === void 0 ? void 0 : divTotalPrice.prepend(totalPriceTitle);
+};
+const selected = (arr) => {
+    arr.forEach((choice) => {
+        const weekday = document.querySelector(`#${choice.chosenDay.toLowerCase()}`);
+        weekday.value = choice.chosenMeal;
+        console.log(weekday);
+    });
+};
 const logout = () => {
     if (confirm("Do you sure you want to leave?"))
         exit();
@@ -197,6 +215,8 @@ const loginUser = (username, password) => {
         clearInputs();
         enter();
         closeModal();
+        showTotal(currUser.choices);
+        selected(currUser.choices);
         return;
     }
     alert("Username or password are incorrect!!! Try again!");
@@ -214,18 +234,6 @@ const login = () => {
         enter();
     }
 })();
-const totalPriceTitle = document.createElement("h2");
-const divTotalPrice = document.querySelector(".totalprice");
-const showTotal = (arr) => {
-    let totalPrice = 0;
-    arr.forEach((choice) => {
-        totalPrice += choice.price;
-    });
-    console.log(totalPrice);
-    totalPriceTitle.classList.add("title_totalprice");
-    totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
-    divTotalPrice === null || divTotalPrice === void 0 ? void 0 : divTotalPrice.prepend(totalPriceTitle);
-};
 const getvalue = (e, day) => {
     const foundPlate = plates.find((plate) => {
         return day === plate.Day && e.value === plate.Type;
