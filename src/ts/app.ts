@@ -278,8 +278,8 @@ const selected = (arr: Choices[]) => {
 ///////////////////////////
 //LOGOUT
 const logout = () => {
-  clearInputs();
   if (confirm("Do you sure you want to leave?")) exit();
+  clearInputs();
   localStorage.removeItem("CurrUser");
 };
 
@@ -296,8 +296,8 @@ const loginUser = (username: string, password: string) => {
 
   if (foundUser) {
     localStorage.setItem("CurrUser", JSON.stringify(foundUser));
-    clearInputs();
     enter();
+    clearInputs();
     closeModal();
     showTotal(foundUser.choices);
     selected(foundUser.choices);

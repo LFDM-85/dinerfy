@@ -204,9 +204,9 @@ const selected = (arr) => {
     });
 };
 const logout = () => {
-    clearInputs();
     if (confirm("Do you sure you want to leave?"))
         exit();
+    clearInputs();
     localStorage.removeItem("CurrUser");
 };
 const loginUser = (username, password) => {
@@ -215,8 +215,8 @@ const loginUser = (username, password) => {
     });
     if (foundUser) {
         localStorage.setItem("CurrUser", JSON.stringify(foundUser));
-        clearInputs();
         enter();
+        clearInputs();
         closeModal();
         showTotal(foundUser.choices);
         selected(foundUser.choices);
