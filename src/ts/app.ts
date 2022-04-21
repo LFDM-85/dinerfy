@@ -127,6 +127,7 @@ const openModal = (mode: string) => {
 
   if (mode === "login") login.classList.remove("hidden");
   if (mode === "signin") signIn.classList.remove("hidden");
+  clearInputs();
 };
 
 const closeModal = () => {
@@ -136,6 +137,7 @@ const closeModal = () => {
   overlay.classList.add("hidden");
   login.classList.add("hidden");
   signIn.classList.add("hidden");
+  clearInputs();
 };
 
 document.addEventListener("keydown", (e) => {

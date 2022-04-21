@@ -94,6 +94,7 @@ const openModal = (mode) => {
         login.classList.remove("hidden");
     if (mode === "signin")
         signIn.classList.remove("hidden");
+    clearInputs();
 };
 const closeModal = () => {
     const login = document.querySelector("#login_modal");
@@ -102,6 +103,7 @@ const closeModal = () => {
     overlay.classList.add("hidden");
     login.classList.add("hidden");
     signIn.classList.add("hidden");
+    clearInputs();
 };
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.classList.contains("hidden")) {
