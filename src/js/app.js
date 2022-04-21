@@ -83,8 +83,8 @@ const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
 const totalPriceTitle = document.createElement("h2");
 const divTotalPrice = document.querySelector(".totalprice");
-const users = JSON.parse(localStorage.getItem("Users")) || [];
-const currUser = JSON.parse(localStorage.getItem("CurrUser"));
+let users = JSON.parse(localStorage.getItem("Users")) || [];
+let foundUser;
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
@@ -140,6 +140,7 @@ const enter = () => {
     login_nav.classList.add("hidden");
     signin_nav.classList.add("hidden");
     logout_nav.classList.remove("hidden");
+    clearInputs();
 };
 const exit = () => {
     order_nav.classList.add("hidden");
@@ -147,6 +148,7 @@ const exit = () => {
     login_nav.classList.remove("hidden");
     signin_nav.classList.remove("hidden");
     logout_nav.classList.add("hidden");
+    clearInputs();
 };
 const addUser = (username, password, email) => {
     const foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
@@ -202,12 +204,13 @@ const selected = (arr) => {
     });
 };
 const logout = () => {
+    clearInputs();
     if (confirm("Do you sure you want to leave?"))
         exit();
     localStorage.removeItem("CurrUser");
 };
 const loginUser = (username, password) => {
-    const foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
+    foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
         return user.username === username && user.password === password;
     });
     if (foundUser) {
@@ -215,8 +218,8 @@ const loginUser = (username, password) => {
         clearInputs();
         enter();
         closeModal();
-        showTotal(currUser.choices);
-        selected(currUser.choices);
+        showTotal(foundUser.choices);
+        selected(foundUser.choices);
         return;
     }
     alert("Username or password are incorrect!!! Try again!");
@@ -232,9 +235,14 @@ const login = () => {
 (function () {
     if (JSON.parse(localStorage.getItem("CurrUser"))) {
         enter();
+        if (foundUser === undefined)
+            return;
+        showTotal(foundUser.choices);
+        selected(foundUser.choices);
     }
 })();
 const getvalue = (e, day) => {
+    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
     const foundPlate = plates.find((plate) => {
         return day === plate.Day && e.value === plate.Type;
     });
@@ -264,6 +272,7 @@ const getvalue = (e, day) => {
     updateCurrUserToUser();
 };
 const updateCurrUserToUser = () => {
+    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
     const verify = users.map((x) => x.username === currUser.username && x.password === currUser.password
         ? currUser
         : x);

@@ -112,8 +112,9 @@ interface User {
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
 // Also currUser is created for validation
-const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
-const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+let users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+// const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+let foundUser: User | undefined;
 
 ////////////////////////////
 // Modal logic
@@ -184,6 +185,7 @@ const enter = () => {
   login_nav.classList.add("hidden");
   signin_nav.classList.add("hidden");
   logout_nav.classList.remove("hidden");
+  clearInputs();
 };
 
 const exit = () => {
@@ -192,11 +194,14 @@ const exit = () => {
   login_nav.classList.remove("hidden");
   signin_nav.classList.remove("hidden");
   logout_nav.classList.add("hidden");
+  clearInputs();
 };
 ////////////////////////////
 // ADD USER
 
 const addUser = (username: string, password: string, email: string) => {
+  // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+
   const foundUser = users?.find((user: { username: string }) => {
     return user.username === username;
   });
@@ -204,6 +209,7 @@ const addUser = (username: string, password: string, email: string) => {
     alert("User already exist!!!");
     exit();
     closeModal();
+
     return;
   }
 
@@ -272,6 +278,7 @@ const selected = (arr: Choices[]) => {
 ///////////////////////////
 //LOGOUT
 const logout = () => {
+  clearInputs();
   if (confirm("Do you sure you want to leave?")) exit();
   localStorage.removeItem("CurrUser");
 };
@@ -280,19 +287,20 @@ const logout = () => {
 // LOGIN
 
 const loginUser = (username: string, password: string) => {
-  const foundUser = users?.find(
-    (user: { username: string; password: string }) => {
-      return user.username === username && user.password === password;
-    }
-  );
+  // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+  // const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+
+  foundUser = users?.find((user: { username: string; password: string }) => {
+    return user.username === username && user.password === password;
+  });
 
   if (foundUser) {
     localStorage.setItem("CurrUser", JSON.stringify(foundUser));
     clearInputs();
     enter();
     closeModal();
-    showTotal(currUser.choices);
-    selected(currUser.choices);
+    showTotal(foundUser.choices);
+    selected(foundUser.choices);
 
     return;
   }
@@ -314,6 +322,9 @@ const login = () => {
 (function () {
   if (JSON.parse(localStorage.getItem("CurrUser")!)) {
     enter();
+    if (foundUser === undefined) return;
+    showTotal(foundUser.choices);
+    selected(foundUser.choices);
   }
 })();
 
@@ -322,6 +333,8 @@ const login = () => {
 
 // Function that receive the choices from the user and then update the choices array. Can add, alter and remove meals/days
 const getvalue = (e: { value: string }, day: string) => {
+  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+
   // Check if specific plates of the day have been selected
   const foundPlate = plates.find((plate) => {
     return day === plate.Day && e.value === plate.Type;
@@ -362,6 +375,9 @@ const getvalue = (e: { value: string }, day: string) => {
 };
 
 const updateCurrUserToUser = () => {
+  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+  // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+
   const verify = users.map((x) =>
     x.username === currUser.username && x.password === currUser.password
       ? currUser
