@@ -360,22 +360,30 @@ const updateCurrUserToUser = () => {
   const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
   const users: User[] = JSON.parse(localStorage.getItem("Users")!);
 
-  let foundUser = users?.find(
-    (users: { username: string; password: string }) => {
-      return (
-        users.username === currUser.username &&
-        users.password === currUser.password
-      );
-    }
+  const verify = users.map((x) =>
+    x.username === currUser.username && x.password === currUser.password
+      ? currUser
+      : x
   );
 
-  if (foundUser) {
-    console.log(foundUser);
-    foundUser.choices = currUser.choices;
-    console.log(foundUser);
-    console.log("Users:", users);
-    console.log("CurrUser", currUser);
-    alert("Your order was added to the cart. Thank you ☺️");
-    localStorage.setItem("Users", JSON.stringify(users));
-  }
+  localStorage.setItem("Users", JSON.stringify(verify));
+
+  // let foundUser = users?.find(
+  //   (users: { username: string; password: string }) => {
+  //     return (
+  //       users.username === currUser.username &&
+  //       users.password === currUser.password
+  //     );
+  //   }
+  // );
+
+  // if (foundUser) {
+  //   console.log(foundUser);
+  //   foundUser.choices = currUser.choices;
+  //   console.log(foundUser);
+  //   console.log("Users:", users);
+  //   console.log("CurrUser", currUser);
+  //   alert("Your order was added to the cart. Thank you ☺️");
+  //   localStorage.setItem("Users", JSON.stringify(users));
+  // }
 };

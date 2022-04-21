@@ -261,17 +261,8 @@ const getvalue = (e, day) => {
 const updateCurrUserToUser = () => {
     const currUser = JSON.parse(localStorage.getItem("CurrUser"));
     const users = JSON.parse(localStorage.getItem("Users"));
-    let foundUser = users === null || users === void 0 ? void 0 : users.find((users) => {
-        return (users.username === currUser.username &&
-            users.password === currUser.password);
-    });
-    if (foundUser) {
-        console.log(foundUser);
-        foundUser.choices = currUser.choices;
-        console.log(foundUser);
-        console.log("Users:", users);
-        console.log("CurrUser", currUser);
-        alert("Your order was added to the cart. Thank you ☺️");
-        localStorage.setItem("Users", JSON.stringify(users));
-    }
+    const verify = users.map((x) => x.username === currUser.username && x.password === currUser.password
+        ? currUser
+        : x);
+    localStorage.setItem("Users", JSON.stringify(verify));
 };
