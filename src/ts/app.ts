@@ -110,7 +110,6 @@ interface User {
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
 const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
-console.log(users);
 
 ////////////////////////////
 // Modal logic

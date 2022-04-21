@@ -82,7 +82,6 @@ const emailInputSignIn = document.querySelector("#email_signin");
 const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
-console.log(users);
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
