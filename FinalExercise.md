@@ -9,7 +9,7 @@
 4- Create a way for user to login, register or logout in the website. At this stage use localStorage to keep user logged in; ✔️
 
 5 -In case user is logged in, a new section is available which is a Schedule section, there the user can book one or several days of the week and choose if he wants the meat or the fish plate. At the end of the section he can see the total price. The options selected by the user must be saved in
-localStorage;
+localStorage; ✔️
 
 let plates=[
 {
