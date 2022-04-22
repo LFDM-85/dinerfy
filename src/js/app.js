@@ -83,8 +83,8 @@ const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
 const totalPriceTitle = document.createElement("h2");
 const divTotalPrice = document.querySelector(".totalprice");
-let users = JSON.parse(localStorage.getItem("Users")) || [];
-let foundUser;
+const users = JSON.parse(localStorage.getItem("Users")) || [];
+const currUser = JSON.parse(localStorage.getItem("CurrUser"));
 const openModal = (mode) => {
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
@@ -94,7 +94,6 @@ const openModal = (mode) => {
         login.classList.remove("hidden");
     if (mode === "signin")
         signIn.classList.remove("hidden");
-    clearInputs();
 };
 const closeModal = () => {
     const login = document.querySelector("#login_modal");
@@ -103,7 +102,6 @@ const closeModal = () => {
     overlay.classList.add("hidden");
     login.classList.add("hidden");
     signIn.classList.add("hidden");
-    clearInputs();
 };
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !modal.classList.contains("hidden")) {
@@ -142,7 +140,6 @@ const enter = () => {
     login_nav.classList.add("hidden");
     signin_nav.classList.add("hidden");
     logout_nav.classList.remove("hidden");
-    clearInputs();
 };
 const exit = () => {
     order_nav.classList.add("hidden");
@@ -150,7 +147,6 @@ const exit = () => {
     login_nav.classList.remove("hidden");
     signin_nav.classList.remove("hidden");
     logout_nav.classList.add("hidden");
-    clearInputs();
 };
 const addUser = (username, password, email) => {
     const foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
@@ -158,8 +154,6 @@ const addUser = (username, password, email) => {
     });
     if (foundUser) {
         alert("User already exist!!!");
-        exit();
-        closeModal();
         return;
     }
     if (!foundUser) {
@@ -170,14 +164,9 @@ const addUser = (username, password, email) => {
             choices: [],
             total: 0,
         });
-        localStorage.setItem("Users", JSON.stringify(users));
         alert("User added. Please login to proceed");
-        clearInputs();
-        enter();
-        closeModal();
-        return { username, password, email };
+        return localStorage.setItem("Users", JSON.stringify(users));
     }
-    return;
 };
 const clearInputs = () => {
     usernameInputSignIn.value = "";
@@ -187,67 +176,61 @@ const clearInputs = () => {
 const signin = () => {
     addUser(usernameInputSignIn.value, passwordInputSignIn.value, emailInputSignIn.value);
     clearInputs();
+    closeModal();
     exit();
 };
-const showTotal = (arr) => {
+const showTotal = (choices) => {
     let totalPrice = 0;
-    arr.forEach((choice) => {
+    choices.forEach((choice) => {
         totalPrice += choice.price;
     });
     totalPriceTitle.classList.add("title_totalprice");
     totalPriceTitle.innerText = `The total is: ${totalPrice.toFixed(2)}€`;
     divTotalPrice === null || divTotalPrice === void 0 ? void 0 : divTotalPrice.prepend(totalPriceTitle);
 };
-const selected = (arr) => {
-    arr.forEach((choice) => {
+const selected = (choices) => {
+    choices.forEach((choice) => {
         const weekday = document.querySelector(`#${choice.chosenDay.toLowerCase()}`);
         weekday.value = choice.chosenMeal;
         console.log(weekday);
     });
 };
 const logout = () => {
-    if (confirm("Do you sure you want to leave?"))
+    if (confirm("Do you sure you want to leave?")) {
         exit();
-    clearInputs();
-    localStorage.removeItem("CurrUser");
+        localStorage.removeItem("CurrUser");
+    }
+    return;
 };
 const loginUser = (username, password) => {
-    foundUser = users === null || users === void 0 ? void 0 : users.find((user) => {
-        return user.username === username && user.password === password;
-    });
+    const foundUser = users === null || users === void 0 ? void 0 : users.find((user) => user.username === username && user.password === password);
     if (foundUser) {
         localStorage.setItem("CurrUser", JSON.stringify(foundUser));
         enter();
-        clearInputs();
-        closeModal();
         showTotal(foundUser.choices);
         selected(foundUser.choices);
         return;
     }
     alert("Username or password are incorrect!!! Try again!");
     exit();
-    clearInputs();
-    closeModal();
     return;
 };
 const login = () => {
     clearInputs();
     loginUser(userlogin.value, passlogin.value);
+    closeModal();
 };
 (function () {
-    if (JSON.parse(localStorage.getItem("CurrUser"))) {
+    if (currUser) {
         enter();
-        if (foundUser === undefined)
-            return;
-        showTotal(foundUser.choices);
-        selected(foundUser.choices);
+        showTotal(currUser.choices);
+        selected(currUser.choices);
     }
+    exit();
 })();
 const getvalue = (e, day) => {
-    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
-    const foundPlate = plates.find((plate) => {
-        return day === plate.Day && e.value === plate.Type;
-    });
+    const foundPlate = plates.find((plate) => day === plate.Day && e.value === plate.Type);
+    console.log("CurrUser choices", currUser.choices);
     const index = currUser.choices.findIndex((choice) => day === choice.chosenDay);
     if (foundPlate) {
         if (index !== -1) {
@@ -271,12 +254,11 @@ const getvalue = (e, day) => {
     currUser.choices.splice(index, 1);
     showTotal(currUser.choices);
     localStorage.setItem("CurrUser", JSON.stringify(currUser));
-    updateCurrUserToUser();
+    return updateCurrUserToUser();
 };
 const updateCurrUserToUser = () => {
-    const currUser = JSON.parse(localStorage.getItem("CurrUser"));
-    const verify = users.map((x) => x.username === currUser.username && x.password === currUser.password
+    const verify = users.map((user) => user.username === currUser.username && user.password === currUser.password
         ? currUser
-        : x);
+        : user);
     localStorage.setItem("Users", JSON.stringify(verify));
 };

@@ -112,9 +112,9 @@ interface User {
 
 // users starts with an empty array, then, from the moment there is a record in the localstorage we will use localstorage.getItem
 // Also currUser is created for validation
-let users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
-// const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-let foundUser: User | undefined;
+const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
+const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+// let foundUser: User | undefined;
 
 ////////////////////////////
 // Modal logic
@@ -127,7 +127,6 @@ const openModal = (mode: string) => {
 
   if (mode === "login") login.classList.remove("hidden");
   if (mode === "signin") signIn.classList.remove("hidden");
-  clearInputs();
 };
 
 const closeModal = () => {
@@ -137,7 +136,6 @@ const closeModal = () => {
   overlay.classList.add("hidden");
   login.classList.add("hidden");
   signIn.classList.add("hidden");
-  clearInputs();
 };
 
 document.addEventListener("keydown", (e) => {
@@ -187,7 +185,6 @@ const enter = () => {
   login_nav.classList.add("hidden");
   signin_nav.classList.add("hidden");
   logout_nav.classList.remove("hidden");
-  clearInputs();
 };
 
 const exit = () => {
@@ -196,22 +193,16 @@ const exit = () => {
   login_nav.classList.remove("hidden");
   signin_nav.classList.remove("hidden");
   logout_nav.classList.add("hidden");
-  clearInputs();
 };
 ////////////////////////////
 // ADD USER
 
 const addUser = (username: string, password: string, email: string) => {
-  // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
-
   const foundUser = users?.find((user: { username: string }) => {
     return user.username === username;
   });
   if (foundUser) {
     alert("User already exist!!!");
-    exit();
-    closeModal();
-
     return;
   }
 
@@ -224,16 +215,12 @@ const addUser = (username: string, password: string, email: string) => {
       total: 0,
     });
 
-    localStorage.setItem("Users", JSON.stringify(users));
-
     alert("User added. Please login to proceed");
-    clearInputs();
-    enter();
-    closeModal();
-    return { username, password, email };
-  }
 
-  return;
+    return localStorage.setItem("Users", JSON.stringify(users));
+
+    // return { username, password, email };
+  }
 };
 
 const clearInputs = () => {
@@ -249,14 +236,15 @@ const signin = () => {
     emailInputSignIn.value
   );
   clearInputs();
+  closeModal();
   exit();
 };
 
 //////////////////////////
 // Show total Price when the user make a choice
-const showTotal = (arr: Choices[]) => {
+const showTotal = (choices: Choices[]) => {
   let totalPrice: number = 0;
-  arr.forEach((choice: { price: number }) => {
+  choices.forEach((choice: { price: number }) => {
     totalPrice += choice.price;
   });
 
@@ -267,8 +255,8 @@ const showTotal = (arr: Choices[]) => {
 
 ///////////////////////////
 // select validation and attribution
-const selected = (arr: Choices[]) => {
-  arr.forEach((choice) => {
+const selected = (choices: Choices[]) => {
+  choices.forEach((choice) => {
     const weekday = document.querySelector(
       `#${choice.chosenDay.toLowerCase()}`
     ) as HTMLSelectElement;
@@ -280,54 +268,50 @@ const selected = (arr: Choices[]) => {
 ///////////////////////////
 //LOGOUT
 const logout = () => {
-  if (confirm("Do you sure you want to leave?")) exit();
-  clearInputs();
-  localStorage.removeItem("CurrUser");
+  if (confirm("Do you sure you want to leave?")) {
+    exit();
+    localStorage.removeItem("CurrUser");
+  }
+  return;
 };
 
 ///////////////////////////
 // LOGIN
 
 const loginUser = (username: string, password: string) => {
-  // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
-  // const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-
-  foundUser = users?.find((user: { username: string; password: string }) => {
-    return user.username === username && user.password === password;
-  });
+  const foundUser = users?.find(
+    (user: { username: string; password: string }) =>
+      user.username === username && user.password === password
+  );
 
   if (foundUser) {
     localStorage.setItem("CurrUser", JSON.stringify(foundUser));
     enter();
-    clearInputs();
-    closeModal();
     showTotal(foundUser.choices);
     selected(foundUser.choices);
-
     return;
   }
 
   alert("Username or password are incorrect!!! Try again!");
   exit();
-  clearInputs();
-  closeModal();
   return;
 };
 
 const login = () => {
   clearInputs();
   loginUser(userlogin.value, passlogin.value);
+  closeModal();
 };
 
 ////////////////////////////
 // CURRENT USER LOGGED IN???
 (function () {
-  if (JSON.parse(localStorage.getItem("CurrUser")!)) {
+  if (currUser) {
     enter();
-    if (foundUser === undefined) return;
-    showTotal(foundUser.choices);
-    selected(foundUser.choices);
+    showTotal(currUser.choices);
+    selected(currUser.choices);
   }
+  exit();
 })();
 
 ////////////////////////////
@@ -335,14 +319,15 @@ const login = () => {
 
 // Function that receive the choices from the user and then update the choices array. Can add, alter and remove meals/days
 const getvalue = (e: { value: string }, day: string) => {
-  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+  // const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
 
   // Check if specific plates of the day have been selected
-  const foundPlate = plates.find((plate) => {
-    return day === plate.Day && e.value === plate.Type;
-  });
+  const foundPlate = plates.find(
+    (plate) => day === plate.Day && e.value === plate.Type
+  );
 
   // Check that if plate is repeated, if it is, change the dish in the same index; put the selected in the correct option
+  console.log("CurrUser choices", currUser.choices);
   const index = currUser.choices.findIndex(
     (choice) => day === choice.chosenDay
   );
@@ -367,23 +352,22 @@ const getvalue = (e: { value: string }, day: string) => {
     return updateCurrUserToUser();
   }
   // If the user removes the selection of the day, remove the day/plate
-
-  // remove selected
   currUser.choices.splice(index, 1);
   showTotal(currUser.choices);
 
   localStorage.setItem("CurrUser", JSON.stringify(currUser));
-  updateCurrUserToUser();
+
+  return updateCurrUserToUser();
 };
 
 const updateCurrUserToUser = () => {
-  const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
+  // const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
   // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
 
-  const verify = users.map((x) =>
-    x.username === currUser.username && x.password === currUser.password
+  const verify = users.map((user) =>
+    user.username === currUser.username && user.password === currUser.password
       ? currUser
-      : x
+      : user
   );
 
   localStorage.setItem("Users", JSON.stringify(verify));
