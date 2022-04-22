@@ -227,6 +227,8 @@ const clearInputs = () => {
   usernameInputSignIn.value = "";
   passwordInputSignIn.value = "";
   emailInputSignIn.value = "";
+  userlogin.value = "";
+  passlogin.value = "";
 };
 
 const signin = () => {
