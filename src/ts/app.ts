@@ -311,7 +311,6 @@ const login = () => {
     showTotal(currUser.choices);
     selected(currUser.choices);
   }
-  exit();
 })();
 
 ////////////////////////////

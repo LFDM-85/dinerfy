@@ -226,7 +226,6 @@ const login = () => {
         showTotal(currUser.choices);
         selected(currUser.choices);
     }
-    exit();
 })();
 const getvalue = (e, day) => {
     const foundPlate = plates.find((plate) => day === plate.Day && e.value === plate.Type);
