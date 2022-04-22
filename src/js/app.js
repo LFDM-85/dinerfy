@@ -1,6 +1,5 @@
 "use strict";
 console.clear();
-console.log("testing...");
 let plates = [
     {
         Name: "Salmon",
@@ -172,6 +171,8 @@ const clearInputs = () => {
     usernameInputSignIn.value = "";
     passwordInputSignIn.value = "";
     emailInputSignIn.value = "";
+    userlogin.value = "";
+    passlogin.value = "";
 };
 const signin = () => {
     addUser(usernameInputSignIn.value, passwordInputSignIn.value, emailInputSignIn.value);

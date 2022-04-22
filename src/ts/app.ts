@@ -1,5 +1,4 @@
 console.clear();
-console.log("testing...");
 
 ////////////////////////////
 // MENU LIST
@@ -114,11 +113,9 @@ interface User {
 // Also currUser is created for validation
 const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
 const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-// let foundUser: User | undefined;
 
 ////////////////////////////
 // Modal logic
-
 const openModal = (mode: string) => {
   const login = document.querySelector("#login_modal") as HTMLElement;
   const signIn = document.querySelector("#signin_modal") as HTMLElement;
@@ -197,6 +194,8 @@ const exit = () => {
 ////////////////////////////
 // ADD USER
 
+// It searchin users array if the New User exists: if so - sends an alert message; if not - create one;
+
 const addUser = (username: string, password: string, email: string) => {
   const foundUser = users?.find((user: { username: string }) => {
     return user.username === username;
@@ -243,7 +242,8 @@ const signin = () => {
 };
 
 //////////////////////////
-// Show total Price when the user make a choice
+// SHOW TOTAL
+// Shows the total price when the user make a new choice
 const showTotal = (choices: Choices[]) => {
   let totalPrice: number = 0;
   choices.forEach((choice: { price: number }) => {
@@ -256,7 +256,7 @@ const showTotal = (choices: Choices[]) => {
 };
 
 ///////////////////////////
-// select validation and attribution
+// select validation and attribution - changes the select attribute to the correct option
 const selected = (choices: Choices[]) => {
   choices.forEach((choice) => {
     const weekday = document.querySelector(
@@ -279,7 +279,7 @@ const logout = () => {
 
 ///////////////////////////
 // LOGIN
-
+// Will search in users if the User is present: if so - will update showTotal and selected functions and save current user in localstorage(currUser)
 const loginUser = (username: string, password: string) => {
   const foundUser = users?.find(
     (user: { username: string; password: string }) =>
@@ -306,7 +306,8 @@ const login = () => {
 };
 
 ////////////////////////////
-// CURRENT USER LOGGED IN???
+// CURRENT USER LOGGED IN
+// Simple verification is the user is still logged on
 (function () {
   if (currUser) {
     enter();
@@ -317,17 +318,14 @@ const login = () => {
 
 ////////////////////////////
 // ORDER
-
 // Function that receive the choices from the user and then update the choices array. Can add, alter and remove meals/days
 const getvalue = (e: { value: string }, day: string) => {
-  // const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-
   // Check if specific plates of the day have been selected
   const foundPlate = plates.find(
     (plate) => day === plate.Day && e.value === plate.Type
   );
 
-  // Check that if plate is repeated, if it is, change the dish in the same index; put the selected in the correct option
+  // Check that if plate is repeated, if it is, change the plate in the same index
   console.log("CurrUser choices", currUser.choices);
   const index = currUser.choices.findIndex(
     (choice) => day === choice.chosenDay
@@ -361,10 +359,9 @@ const getvalue = (e: { value: string }, day: string) => {
   return updateCurrUserToUser();
 };
 
+///////////////////////////////
+// This function copies the currUser to is respective user
 const updateCurrUserToUser = () => {
-  // const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
-  // const users: User[] = JSON.parse(localStorage.getItem("Users")!) || [];
-
   const verify = users.map((user) =>
     user.username === currUser.username && user.password === currUser.password
       ? currUser
