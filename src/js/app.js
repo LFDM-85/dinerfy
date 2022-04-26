@@ -72,16 +72,11 @@ let plates = [
         img: "https://cdn.pixabay.com/photo/2018/01/01/17/57/fish-soup-3054627_960_720.jpg",
     },
 ];
-const overlay = document.querySelector(".overlay");
-const modal = document.querySelector(".modal");
-const usernameInputSignIn = document.querySelector("#username_signin");
-const passwordInputSignIn = document.querySelector("#password_signin");
-const emailInputSignIn = document.querySelector("#email_signin");
-const userlogin = document.querySelector("#userlogin");
-const passlogin = document.querySelector("#passlogin");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
 const currUser = JSON.parse(localStorage.getItem("CurrUser"));
 const openModal = (mode) => {
+    const overlay = document.querySelector(".overlay");
+    const modal = document.querySelector(".modal");
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
     modal.classList.remove("hidden");
@@ -92,6 +87,8 @@ const openModal = (mode) => {
         signIn.classList.remove("hidden");
 };
 const closeModal = () => {
+    const overlay = document.querySelector(".overlay");
+    const modal = document.querySelector(".modal");
     const login = document.querySelector("#login_modal");
     const signIn = document.querySelector("#signin_modal");
     modal.classList.add("hidden");
@@ -100,6 +97,7 @@ const closeModal = () => {
     signIn.classList.add("hidden");
 };
 document.addEventListener("keydown", (e) => {
+    const modal = document.querySelector(".modal");
     if (e.key === "Escape" && !modal.classList.contains("hidden")) {
         closeModal();
     }
@@ -127,12 +125,12 @@ plates.forEach(({ Day, img, Name, Price }) => {
         `;
     menuItems.prepend(menuday);
 });
-const order_nav = document.querySelector(".nav_link_order");
-const order_section = document.querySelector("#section_4");
-const login_nav = document.querySelector(".btn_login");
-const signin_nav = document.querySelector(".btn_signin");
-const logout_nav = document.querySelector(".btn_logout");
 const enter = () => {
+    const order_nav = document.querySelector(".nav_link_order");
+    const order_section = document.querySelector("#section_4");
+    const login_nav = document.querySelector(".btn_login");
+    const signin_nav = document.querySelector(".btn_signin");
+    const logout_nav = document.querySelector(".btn_logout");
     order_nav.classList.remove("hidden");
     order_section.classList.remove("hidden");
     login_nav.classList.add("hidden");
@@ -140,6 +138,11 @@ const enter = () => {
     logout_nav.classList.remove("hidden");
 };
 const exit = () => {
+    const order_nav = document.querySelector(".nav_link_order");
+    const order_section = document.querySelector("#section_4");
+    const login_nav = document.querySelector(".btn_login");
+    const signin_nav = document.querySelector(".btn_signin");
+    const logout_nav = document.querySelector(".btn_logout");
     order_nav.classList.add("hidden");
     order_section.classList.add("hidden");
     login_nav.classList.remove("hidden");
@@ -167,6 +170,11 @@ const addUser = (username, password, email) => {
     }
 };
 const clearInputs = () => {
+    const userlogin = document.querySelector("#userlogin");
+    const passlogin = document.querySelector("#passlogin");
+    const usernameInputSignIn = document.querySelector("#username_signin");
+    const passwordInputSignIn = document.querySelector("#password_signin");
+    const emailInputSignIn = document.querySelector("#email_signin");
     usernameInputSignIn.value = "";
     passwordInputSignIn.value = "";
     emailInputSignIn.value = "";
@@ -174,6 +182,9 @@ const clearInputs = () => {
     passlogin.value = "";
 };
 const signin = () => {
+    const usernameInputSignIn = document.querySelector("#username_signin");
+    const passwordInputSignIn = document.querySelector("#password_signin");
+    const emailInputSignIn = document.querySelector("#email_signin");
     addUser(usernameInputSignIn.value, passwordInputSignIn.value, emailInputSignIn.value);
     clearInputs();
     closeModal();
@@ -218,6 +229,8 @@ const loginUser = (username, password) => {
     return;
 };
 const login = () => {
+    const userlogin = document.querySelector("#userlogin");
+    const passlogin = document.querySelector("#passlogin");
     clearInputs();
     loginUser(userlogin.value, passlogin.value);
     closeModal();

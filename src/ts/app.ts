@@ -76,24 +76,6 @@ let plates = [
   },
 ];
 
-////////////////////////////
-//DOM ELEMENTS
-const overlay = document.querySelector(".overlay") as HTMLElement;
-const modal = document.querySelector(".modal") as HTMLElement;
-
-const usernameInputSignIn = document.querySelector(
-  "#username_signin"
-) as HTMLInputElement;
-const passwordInputSignIn = document.querySelector(
-  "#password_signin"
-) as HTMLInputElement;
-const emailInputSignIn = document.querySelector(
-  "#email_signin"
-) as HTMLInputElement;
-
-const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
-const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
-
 interface Choices {
   chosenDay: string;
   chosenMeal: string;
@@ -116,6 +98,8 @@ const currUser: User = JSON.parse(localStorage.getItem("CurrUser")!);
 ////////////////////////////
 // Modal logic
 const openModal = (mode: string) => {
+  const overlay = document.querySelector(".overlay") as HTMLElement;
+  const modal = document.querySelector(".modal") as HTMLElement;
   const login = document.querySelector("#login_modal") as HTMLElement;
   const signIn = document.querySelector("#signin_modal") as HTMLElement;
   modal.classList.remove("hidden");
@@ -126,6 +110,8 @@ const openModal = (mode: string) => {
 };
 
 const closeModal = () => {
+  const overlay = document.querySelector(".overlay") as HTMLElement;
+  const modal = document.querySelector(".modal") as HTMLElement;
   const login = document.querySelector("#login_modal") as HTMLElement;
   const signIn = document.querySelector("#signin_modal") as HTMLElement;
   modal.classList.add("hidden");
@@ -135,6 +121,7 @@ const closeModal = () => {
 };
 
 document.addEventListener("keydown", (e) => {
+  const modal = document.querySelector(".modal") as HTMLElement;
   if (e.key === "Escape" && !modal.classList.contains("hidden")) {
     closeModal();
   }
@@ -167,17 +154,14 @@ plates.forEach(({ Day, img, Name, Price }) => {
   menuItems.prepend(menuday);
 });
 
-////////////////////////////
-// VALIDATE ENTER AND EXIT
-const order_nav = document.querySelector(
-  ".nav_link_order"
-) as HTMLButtonElement;
-const order_section = document.querySelector("#section_4") as HTMLElement;
-const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
-const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
-const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
-
 const enter = () => {
+  const order_nav = document.querySelector(
+    ".nav_link_order"
+  ) as HTMLButtonElement;
+  const order_section = document.querySelector("#section_4") as HTMLElement;
+  const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
+  const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
+  const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
   order_nav.classList.remove("hidden");
   order_section.classList.remove("hidden");
   login_nav.classList.add("hidden");
@@ -186,6 +170,13 @@ const enter = () => {
 };
 
 const exit = () => {
+  const order_nav = document.querySelector(
+    ".nav_link_order"
+  ) as HTMLButtonElement;
+  const order_section = document.querySelector("#section_4") as HTMLElement;
+  const login_nav = document.querySelector(".btn_login") as HTMLButtonElement;
+  const signin_nav = document.querySelector(".btn_signin") as HTMLButtonElement;
+  const logout_nav = document.querySelector(".btn_logout") as HTMLButtonElement;
   order_nav.classList.add("hidden");
   order_section.classList.add("hidden");
   login_nav.classList.remove("hidden");
@@ -224,6 +215,17 @@ const addUser = (username: string, password: string, email: string) => {
 };
 
 const clearInputs = () => {
+  const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
+  const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
+  const usernameInputSignIn = document.querySelector(
+    "#username_signin"
+  ) as HTMLInputElement;
+  const passwordInputSignIn = document.querySelector(
+    "#password_signin"
+  ) as HTMLInputElement;
+  const emailInputSignIn = document.querySelector(
+    "#email_signin"
+  ) as HTMLInputElement;
   usernameInputSignIn.value = "";
   passwordInputSignIn.value = "";
   emailInputSignIn.value = "";
@@ -232,6 +234,15 @@ const clearInputs = () => {
 };
 
 const signin = () => {
+  const usernameInputSignIn = document.querySelector(
+    "#username_signin"
+  ) as HTMLInputElement;
+  const passwordInputSignIn = document.querySelector(
+    "#password_signin"
+  ) as HTMLInputElement;
+  const emailInputSignIn = document.querySelector(
+    "#email_signin"
+  ) as HTMLInputElement;
   addUser(
     usernameInputSignIn.value,
     passwordInputSignIn.value,
@@ -303,6 +314,8 @@ const loginUser = (username: string, password: string) => {
 };
 
 const login = () => {
+  const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
+  const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
   clearInputs();
   loginUser(userlogin.value, passlogin.value);
   closeModal();
