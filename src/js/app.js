@@ -74,14 +74,11 @@ let plates = [
 ];
 const overlay = document.querySelector(".overlay");
 const modal = document.querySelector(".modal");
-const menuItems = document.querySelector(".menu");
 const usernameInputSignIn = document.querySelector("#username_signin");
 const passwordInputSignIn = document.querySelector("#password_signin");
 const emailInputSignIn = document.querySelector("#email_signin");
 const userlogin = document.querySelector("#userlogin");
 const passlogin = document.querySelector("#passlogin");
-const totalPriceTitle = document.createElement("h2");
-const divTotalPrice = document.querySelector(".totalprice");
 const users = JSON.parse(localStorage.getItem("Users")) || [];
 const currUser = JSON.parse(localStorage.getItem("CurrUser"));
 const openModal = (mode) => {
@@ -108,6 +105,7 @@ document.addEventListener("keydown", (e) => {
     }
 });
 plates.forEach(({ Day, img, Name, Price }) => {
+    const menuItems = document.querySelector(".menu");
     const menuday = document.createElement("div");
     menuday.classList.add("flex-container");
     menuday.innerHTML = `
@@ -118,7 +116,8 @@ plates.forEach(({ Day, img, Name, Price }) => {
               <img
                 class="menu_img"
                 src="${img}"
-                alt=""
+                alt="${Name} plate"
+                loading="lazy"
               />
             </div>
             <span>${Name}</span>
@@ -181,6 +180,8 @@ const signin = () => {
     exit();
 };
 const showTotal = (choices) => {
+    const totalPriceTitle = document.createElement("h2");
+    const divTotalPrice = document.querySelector(".totalprice");
     let totalPrice = 0;
     choices.forEach((choice) => {
         totalPrice += choice.price;

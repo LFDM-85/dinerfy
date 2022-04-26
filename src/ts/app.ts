@@ -80,7 +80,7 @@ let plates = [
 //DOM ELEMENTS
 const overlay = document.querySelector(".overlay") as HTMLElement;
 const modal = document.querySelector(".modal") as HTMLElement;
-const menuItems = document.querySelector(".menu") as HTMLElement;
+
 const usernameInputSignIn = document.querySelector(
   "#username_signin"
 ) as HTMLInputElement;
@@ -90,10 +90,9 @@ const passwordInputSignIn = document.querySelector(
 const emailInputSignIn = document.querySelector(
   "#email_signin"
 ) as HTMLInputElement;
+
 const userlogin = document.querySelector("#userlogin") as HTMLInputElement;
 const passlogin = document.querySelector("#passlogin") as HTMLInputElement;
-const totalPriceTitle = document.createElement("h2");
-const divTotalPrice = document.querySelector(".totalprice");
 
 interface Choices {
   chosenDay: string;
@@ -145,6 +144,7 @@ document.addEventListener("keydown", (e) => {
 //MENU LIST
 
 plates.forEach(({ Day, img, Name, Price }) => {
+  const menuItems = document.querySelector(".menu") as HTMLElement;
   const menuday = document.createElement("div");
   menuday.classList.add("flex-container");
   menuday.innerHTML = `
@@ -155,7 +155,8 @@ plates.forEach(({ Day, img, Name, Price }) => {
               <img
                 class="menu_img"
                 src="${img}"
-                alt=""
+                alt="${Name} plate"
+                loading="lazy"
               />
             </div>
             <span>${Name}</span>
@@ -245,6 +246,8 @@ const signin = () => {
 // SHOW TOTAL
 // Shows the total price when the user make a new choice
 const showTotal = (choices: Choices[]) => {
+  const totalPriceTitle = document.createElement("h2");
+  const divTotalPrice = document.querySelector(".totalprice");
   let totalPrice: number = 0;
   choices.forEach((choice: { price: number }) => {
     totalPrice += choice.price;
